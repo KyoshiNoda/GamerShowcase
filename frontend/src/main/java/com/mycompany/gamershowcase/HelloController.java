@@ -1,10 +1,9 @@
-package com.mycompany.gamershowcase;
+package com.example.logindemo2;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-public class PrimaryController {
-
+public class HelloController {
     @FXML
     private Label welcomeText;
 
