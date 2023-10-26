@@ -33,8 +33,7 @@ public class App extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("register"), 1000, 650);
         stage.setScene(scene);
         stage.show();
     }
