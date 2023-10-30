@@ -4,6 +4,7 @@ module com.example.frontend {
     requires firebase.admin;
     requires com.google.auth.oauth2;
     requires com.google.auth;
+    requires java.net.http;
 
 
     opens com.example.frontend to javafx.fxml;
