@@ -1,7 +1,11 @@
-module com.mycompany.gamershowcase {
+module com.example.frontend {
     requires javafx.controls;
     requires javafx.fxml;
+    requires firebase.admin;
+    requires com.google.auth.oauth2;
+    requires com.google.auth;
 
-    opens com.mycompany.gamershowcase to javafx.fxml;
-    exports com.mycompany.gamershowcase;
+
+    opens com.example.frontend to javafx.fxml;
+    exports com.example.frontend;
 }
