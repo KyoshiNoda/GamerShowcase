@@ -1,4 +1,4 @@
-package com.example.frontend;
+package com.example.frontend.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,9 +14,8 @@ public class WelcomePageController {
     @FXML
     protected void loginPageHandler() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/login-page.fxml"));
             Scene scene = new Scene(loader.load(), 500, 500);
-
             Stage stage = (Stage) welcomeText.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
@@ -26,7 +25,7 @@ public class WelcomePageController {
     @FXML
     protected void registerPageHandler() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("register-page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/register-page.fxml"));
             Scene scene = new Scene(loader.load(), 500, 500);
 
             Stage stage = (Stage) welcomeText.getScene().getWindow();
