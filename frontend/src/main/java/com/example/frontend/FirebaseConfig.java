@@ -11,7 +11,7 @@ public class FirebaseConfig {
 
     public static void initialize() {
         try {
-            FileInputStream serviceAccount = new FileInputStream("/Users/kyoshinoda/Downloads/refreshToken.json");
+            FileInputStream serviceAccount = new FileInputStream("/Users/wnwil/Downloads/refreshToken.json");
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://gamershowcase-a0e6b.firebaseio.com")
