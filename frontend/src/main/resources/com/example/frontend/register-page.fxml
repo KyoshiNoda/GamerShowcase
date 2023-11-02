@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.RegisterPageController">
     <children>
         <Label layoutX="291.0" layoutY="13.0" prefHeight="70.0" prefWidth="355.0" text="Create Your Account">
@@ -24,8 +25,8 @@
                 <TextField fx:id="firstNameInput" prefHeight="41.0" prefWidth="386.0" promptText="First Name" />
                 <TextField fx:id="lastNameInput" prefHeight="41.0" prefWidth="386.0" promptText="Last Name" />
                 <TextField fx:id="emailInput" prefHeight="41.0" prefWidth="386.0" promptText="Email" />
-                <TextField fx:id="passwordInput" prefHeight="41.0" prefWidth="386.0" promptText="Password" />
-                <TextField fx:id="confirmPasswordInput" prefHeight="41.0" prefWidth="386.0" promptText="Confirm Password" />
+                <PasswordField fx:id="passwordInput" prefHeight="41.0" prefWidth="386.0" promptText="Password" />
+                <PasswordField fx:id="confirmPasswordInput" prefHeight="41.0" prefWidth="386.0" promptText="Confirm Password" />
 
             </children>
         </VBox>
