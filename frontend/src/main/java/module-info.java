@@ -5,6 +5,9 @@ module com.example.frontend {
     requires com.google.auth.oauth2;
     requires com.google.auth;
     requires java.net.http;
+    requires google.cloud.firestore;
+    requires google.cloud.core;
+    requires com.google.api.apicommon;
 
 
     opens com.example.frontend to javafx.fxml;
