@@ -1,14 +1,25 @@
 package com.example.frontend.controllers;
 
+
+import com.example.frontend.App;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.google.api.core.ApiFuture;
 
+import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterPageController {
     @FXML private TextField firstNameInput;
@@ -19,6 +30,7 @@ public class RegisterPageController {
     @FXML private Button submitButton;
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private Firestore firestore = FirestoreClient.getFirestore();
 
     @FXML
     private void submitHandler(ActionEvent event) {
@@ -34,11 +46,27 @@ public class RegisterPageController {
         }
 
         try {
+            // auth
             UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                     .setEmail(email)
                     .setPassword(password);
             UserRecord userRecord = auth.createUser(request);
-            System.out.println("Successfully created user with UID: " + userRecord.getUid());
+            String uid = userRecord.getUid();
+            System.out.println("Successfully created user with UID: " + uid);
+
+            DocumentReference userDocRef = App.db.collection("Users").document(uid);
+
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("firstName", firstName);
+            userData.put("lastName", lastName);
+            userData.put("email", email);
+            userData.put("favGames", new ArrayList<String>());
+
+            ApiFuture<WriteResult> result = userDocRef.set(userData);
+
+
+            System.out.println("User data added to Firestore for UID: " + uid);
+
         } catch (FirebaseAuthException e) {
             System.out.println("Error creating user: " + e.getMessage());
         }

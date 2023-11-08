@@ -1,15 +1,17 @@
 package com.example.frontend;
 
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class FirebaseConfig {
 
-    public static void initialize() {
+    public static Firestore initialize() {
         try {
             FileInputStream serviceAccount = new FileInputStream("/Users/kyoshinoda/Downloads/refreshToken.json");
             FirebaseOptions options = FirebaseOptions.builder()
@@ -20,5 +22,6 @@ public class FirebaseConfig {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return FirestoreClient.getFirestore();
     }
 }
