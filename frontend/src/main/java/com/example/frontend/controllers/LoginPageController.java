@@ -1,28 +1,18 @@
 package com.example.frontend.controllers;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginPageController {
-    @FXML private Label titleLabel;
-    @FXML private Label usernameLabel;
-    @FXML private Label passwordLabel;
-    @FXML private TextField usernameField;
+    @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
-    @FXML private Button loginButton;
 
     @FXML
-    public void initialize() {
-        titleLabel.setText("Gamer Showcase");
-        loginButton.setOnAction(event -> handleLoginButtonAction());
-    }
-
-    private void handleLoginButtonAction() {
-        String username = usernameField.getText();
+    private void loginButtonHandler(ActionEvent actionEvent) {
+        String email = emailField.getText();
         String password = passwordField.getText();
-        System.out.println("UserName: " + username);
+        System.out.println("email: " + email);
         System.out.println("Password: " + password);
     }
 }
