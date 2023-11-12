@@ -2,7 +2,6 @@ package com.example.frontend.controllers;
 
 import com.example.frontend.App;
 import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.auth.UserRecord;
 import org.mindrot.jbcrypt.BCrypt;
 

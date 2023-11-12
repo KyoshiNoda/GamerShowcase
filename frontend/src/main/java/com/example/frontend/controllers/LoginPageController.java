@@ -27,14 +27,19 @@ public class LoginPageController {
 
         try {
             var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
-
             if (!querySnapshot.isEmpty()) {
                 DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
-
                 String storedHashedPassword = userSnapshot.getString("password");
+
                 if (BCrypt.checkpw(password, storedHashedPassword)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
                     Parent root = loader.load();
+                    MainPageController mainPageController = loader.getController();
+                    mainPageController.setUserData(
+                            userSnapshot.getString("firstName"),
+                            userSnapshot.getString("lastName"),
+                            userSnapshot.getString("email")
+                    );
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) emailField.getScene().getWindow();
                     stage.setScene(scene);
@@ -43,7 +48,7 @@ public class LoginPageController {
                     showAlert("Invalid password");
                 }
             } else {
-                showAlert("Missing Information!");
+                showAlert("Incorrect Information!");
             }
         } catch (InterruptedException | ExecutionException | IOException e) {
             showAlert("Error during login: " + e.getMessage());

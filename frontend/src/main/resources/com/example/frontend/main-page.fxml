@@ -4,13 +4,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.MainPageController">
-   <children>
-      <Label layoutX="189.0" layoutY="161.0" text="MAIN PAGE">
-         <font>
-            <Font size="44.0" />
-         </font>
-      </Label>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.MainPageController">
+   <Label fx:id="firstNameLabel" layoutX="189.0" layoutY="161.0" text="First Name:">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Label fx:id="lastNameLabel" layoutX="189.0" layoutY="191.0" text="Last Name:">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
+   <Label fx:id="emailLabel" layoutX="189.0" layoutY="221.0" text="Email:">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Label>
 </AnchorPane>
