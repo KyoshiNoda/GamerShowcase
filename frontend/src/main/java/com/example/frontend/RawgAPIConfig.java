@@ -11,14 +11,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class RawgAPIConfig {
-    public static void getGames(){
+    public static ArrayList<Game> getGames() throws Exception {
         String apiKey = System.getenv("RAWG_API_KEY");
+        ArrayList<Game> games = new ArrayList<>();
+
         if (apiKey == null) {
-            System.err.println("API key not found in environment variables");
-            return;
+            throw new Exception("API key not found in environment variables");
         }
 
-        String apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=250&ordering=-metacritic";
+        String apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=20&ordering=-metacritic";
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
@@ -35,7 +36,6 @@ public class RawgAPIConfig {
         if (response != null && response.statusCode() == 200) {
             String responseBody = response.body();
             JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
-            ArrayList<Game> games = new ArrayList<>();
 
             // Check if the "results" array exists
             if (jsonObject.has("results")) {
@@ -103,34 +103,13 @@ public class RawgAPIConfig {
                         String background_image = resultObject.get("background_image").getAsString();
                         game.setBackground_image(background_image);
                     }
-
                     games.add(game);
                 }
             } else {
                 System.out.println("The 'results' array is missing in the JSON response.");
-            }
-
-            for(int i = 0; i < games.size(); i++){
-                System.out.println("Name: " + games.get(i).getName());
-                System.out.println("Platforms: " + games.get(i).getPlatforms());
-                System.out.println("Released: " + games.get(i).getReleased());
-                System.out.println("Rating: " + games.get(i).getRating());
-                System.out.println("ID: " + games.get(i).getId());
-
-                if(games.get(i).getEsrb() == null){
-                    System.out.println("ESRB: Not rated");
-                } else {
-                    System.out.println("ESRB: " + games.get(i).getEsrb());
-                }
-
-                if(games.get(i).getBackground_image() == null){
-                    System.out.println("Background image: Not available");
-                } else {
-                    System.out.println("Background image: " + games.get(i).getBackground_image());
-                }
-
-                System.out.println("\n");
+                return new ArrayList<Game>();
             }
         }
+        return games;
     }
 }
