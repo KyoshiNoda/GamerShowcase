@@ -55,19 +55,18 @@ public class RawgAPIConfig {
                     // Check if the "platforms" property exists for each element
                     if (resultObject.has("platforms")) {
                         JsonArray platformsArray = resultObject.getAsJsonArray("platforms");
-                        String platforms = "";
+                        ArrayList<String> platformNames = new ArrayList<>();
                         for (int j = 0; j < platformsArray.size(); j++) {
                             JsonObject platformObject = platformsArray.get(j).getAsJsonObject();
                             if (platformObject.has("platform")) {
                                 JsonObject platform = platformObject.getAsJsonObject("platform");
                                 if (platform.has("name")) {
                                     String platformName = platform.get("name").getAsString();
-                                    platforms += platformName + ",";
+                                    platformNames.add(platformName);
                                 }
                             }
                         }
-                        game.setPlatforms(platforms);
-
+                        game.setPlatforms(platformNames);
                     }
 
                     // Check if the "released" property exists for each element

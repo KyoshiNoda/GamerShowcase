@@ -1,4 +1,4 @@
-package com.example.frontend.controllers;
+package com.example.frontend;
 
 import java.util.List;
 
