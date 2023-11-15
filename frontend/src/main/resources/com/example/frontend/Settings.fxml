@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.SettingsController">
+   <children>
+      <ImageView fitHeight="134.0" fitWidth="168.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="Back_Button" layoutX="491.0" layoutY="327.0" mnemonicParsing="false" onAction="#Return_To_Main_Page" text="Back">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Button>
+      <Label layoutX="173.0" layoutY="23.0" prefHeight="40.0" prefWidth="71.0" text="Hello">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Name_Box" layoutX="245.0" layoutY="14.0">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </TextField>
+      <Label layoutX="168.0" layoutY="74.0" text="What would you like to do?">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="Change_First_Name_Button" layoutX="11.0" layoutY="175.0" mnemonicParsing="false" onAction="#Go_To_Change_First_Name" text="Change first name">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="Change_Last_Name_Button" layoutX="340.0" layoutY="175.0" mnemonicParsing="false" onAction="#Go_To_Change_Last_Name" text="Change Last name">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="Change_Username_Button" layoutX="11.0" layoutY="250.0" mnemonicParsing="false" onAction="#Go_To_Change_Username" text="Change Username">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="Change_Email_Button" layoutX="340.0" layoutY="250.0" mnemonicParsing="false" onAction="#Go_To_Change_Email" text="Change Email">
+         <font>
+            <Font name="Times New Roman" size="28.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

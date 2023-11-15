@@ -8,6 +8,7 @@ module com.example.frontend {
     requires google.cloud.firestore;
     requires google.cloud.core;
     requires com.google.api.apicommon;
+    requires com.google.gson;
 
 
     opens com.example.frontend to javafx.fxml;
