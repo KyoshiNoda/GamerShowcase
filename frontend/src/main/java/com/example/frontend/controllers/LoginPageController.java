@@ -34,12 +34,12 @@ public class LoginPageController {
                 if (BCrypt.checkpw(password, storedHashedPassword)) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
                     Parent root = loader.load();
-                    MainPageController mainPageController = loader.getController();
-                    mainPageController.setUserData(
-                            userSnapshot.getString("firstName"),
-                            userSnapshot.getString("lastName"),
-                            userSnapshot.getString("email")
-                    );
+//                    MainPageController mainPageController = loader.getController();
+//                    mainPageController.setUserData(
+//                            userSnapshot.getString("firstName"),
+//                            userSnapshot.getString("lastName"),
+//                            userSnapshot.getString("email"),
+//                    );
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) emailField.getScene().getWindow();
                     stage.setScene(scene);
