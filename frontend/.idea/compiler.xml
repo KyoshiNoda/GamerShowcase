@@ -9,8 +9,5 @@
         <module name="frontend" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="frontend" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
