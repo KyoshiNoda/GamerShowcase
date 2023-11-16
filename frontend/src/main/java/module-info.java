@@ -9,6 +9,7 @@ module com.example.frontend {
     requires google.cloud.core;
     requires com.google.api.apicommon;
     requires com.google.gson;
+    requires jbcrypt;
 
 
     opens com.example.frontend to javafx.fxml;
