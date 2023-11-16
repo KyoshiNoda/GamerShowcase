@@ -6,11 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.Parent;
 
 public class App extends Application {
     public static Firestore db;
     public static FirebaseAuth auth;
     private final FirebaseConfig firebaseConfig = new FirebaseConfig();
+
+    private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -18,10 +21,19 @@ public class App extends Application {
        auth = FirebaseAuth.getInstance();
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Settings.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        scene = new Scene(loadFXML("Settings"), 640, 480);
         stage.setTitle("GamerShowcase!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void setRoot (String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
     }
 
     public static void main(String[] args) {

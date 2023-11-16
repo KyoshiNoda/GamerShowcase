@@ -1,7 +1,10 @@
 package com.example.frontend.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import com.example.frontend.App;
 
 import java.io.IOException;
 
@@ -25,20 +28,21 @@ public class SettingsController {
     }
     @FXML
     public void Go_To_Change_First_Name() throws IOException {
-   //     App.setRoot("ChangeFirstName");
+        //App.setRoot("ChangeFirstName");
     }
     @FXML
     public void Go_To_Change_Last_Name() throws IOException {
-      //  App.setRoot("ChangeLastName");
+        //App.setRoot("ChangeLastName");
     }
 
     @FXML
     public void Go_To_Change_Username() throws IOException {
-       // App.setRoot("ChangeUsername");
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Username.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
     }
 
     @FXML
     public void Go_To_Change_Email() throws IOException {
-     //   App.setRoot("ChangeEmail");
+        //App.setRoot("ChangeEmail");
     }
 }

@@ -1,5 +1,6 @@
 package com.example.frontend.controllers;
 
+import com.example.frontend.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -17,6 +18,6 @@ public class ChangeUsernameController {
     }
 
     public void BackHandler() throws IOException {
-        //App.setRoot("Settings");
+        App.setRoot("Settings");
     }
 }
