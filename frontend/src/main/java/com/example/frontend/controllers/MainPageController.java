@@ -9,9 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
-
 import static com.example.frontend.RawgAPIConfig.getGames;
 
 public class MainPageController {
@@ -48,9 +46,18 @@ public class MainPageController {
         System.out.println("firstName: " + firstName);
         System.out.println("lastName: " + lastName);
         System.out.println("Email: " + email);
-
         for (Game currentGame : favGames) {
+            System.out.println(currentGame.getId());
             System.out.println(currentGame.getName());
+            System.out.println(currentGame.getEsrb());
+            System.out.println(currentGame.getBackground_image());
+            System.out.println(currentGame.getRating());
+            System.out.println(currentGame.getReleased());
+
+            System.out.println("Game Platforms:");
+            for (String platform : currentGame.getPlatforms()) {
+                System.out.println("\t" + platform);
+            }
         }
     }
 

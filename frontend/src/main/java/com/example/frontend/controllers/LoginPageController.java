@@ -65,13 +65,11 @@ public class LoginPageController {
             for (Object gameObj : (ArrayList<?>) favGamesObject) {
                 if (gameObj instanceof Map) {
                     Map<String, Object> gameMap = (Map<String, Object>) gameObj;
-
-                    // Extract game properties and create a Game object
                     Game game = new Game(
                             (String) gameMap.get("name"),
                             (ArrayList<String>) gameMap.get("platforms"),
                             (String) gameMap.get("released"),
-                            String.valueOf(gameMap.get("rating")), // Ensure rating is stored as String
+                            String.valueOf(gameMap.get("rating")),
                             ((Long) gameMap.get("id")).intValue(),
                             (String) gameMap.get("esrb"),
                             (String) gameMap.get("background_image")
@@ -84,9 +82,6 @@ public class LoginPageController {
 
         return favGames;
     }
-
-
-
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Authentication Error");
@@ -94,6 +89,4 @@ public class LoginPageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
 }
