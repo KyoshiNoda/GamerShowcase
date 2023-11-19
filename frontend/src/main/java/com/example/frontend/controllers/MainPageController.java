@@ -43,6 +43,17 @@ public class MainPageController {
         }
     }
 
+    @FXML
+    void setUserData(String firstName, String lastName, String email, ArrayList<Game> favGames) {
+        System.out.println("firstName: " + firstName);
+        System.out.println("lastName: " + lastName);
+        System.out.println("Email: " + email);
+
+        for (Game currentGame : favGames) {
+            System.out.println(currentGame.getName());
+        }
+    }
+
     private void setGameCardClickHandler(StackPane cardPane, Game game) {
         cardPane.setOnMouseClicked(event -> {
             handleGameCardClick(game);
@@ -111,9 +122,6 @@ public class MainPageController {
         System.out.println("Favorite button clicked for game: " + game.getName());
     }
 
-
-
-
     private void setDefaultCardImage(StackPane cardPane) {
         String defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXGl68Y0oCfYlx18OswvBI5QNYjr7bHdCCUvAf8lHeig&s";
 
@@ -144,6 +152,4 @@ public class MainPageController {
 
         cardPane.getChildren().add(vBox);
     }
-
-
 }

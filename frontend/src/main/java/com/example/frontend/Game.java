@@ -31,6 +31,10 @@ public class Game {
         this.esrb = null;
         this.background_image = null;
     }
+
+    public Game(String name, ArrayList<String> platforms, String released, double rating, int id, String esrb, String backgroundImage) {
+    }
+
     public String getName() {
         return name;
     }
