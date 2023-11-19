@@ -3,6 +3,7 @@ package com.example.frontend.controllers;
 import com.example.frontend.Game;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -81,14 +82,19 @@ public class MainPageController {
                 VBox vBox = new VBox(10);
                 vBox.setAlignment(Pos.CENTER);
                 vBox.getChildren().addAll(imageView, nameLabel);
+
+                Button favoriteButton = new Button("Favorite Game");
+                favoriteButton.setOnAction(event -> handleFavoriteButtonClick(game));
+
+                vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                            Color.BLACK,
-                            BorderStrokeStyle.SOLID,
-                            CornerRadii.EMPTY,
-                            new BorderWidths(1)
+                                Color.BLACK,
+                                BorderStrokeStyle.SOLID,
+                                CornerRadii.EMPTY,
+                                new BorderWidths(1)
                         )
-                    )
+                        )
                 );
                 cardPane.getChildren().add(vBox);
             } catch (Exception e) {
@@ -99,6 +105,12 @@ public class MainPageController {
             setDefaultCardImage(cardPane);
         }
     }
+
+    // New method to handle button clicks
+    private void handleFavoriteButtonClick(Game game) {
+        System.out.println("Favorite button clicked for game: " + game.getName());
+    }
+
 
 
 
@@ -114,17 +126,24 @@ public class MainPageController {
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(defaultImageView, nameLabel);
+
+        // Add Favorite Game button
+        Button favoriteButton = new Button("Favorite Game");
+//        favoriteButton.setOnAction(event -> handleFavoriteButtonClick(null));
+        vBox.getChildren().add(favoriteButton);
+
         vBox.setPrefSize(200, 300);
         vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                    Color.BLACK,
-                    BorderStrokeStyle.SOLID,
-                    CornerRadii.EMPTY,
-                    new BorderWidths(1)
+                        Color.BLACK,
+                        BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY,
+                        new BorderWidths(1)
                 )
-            )
+                )
         );
 
         cardPane.getChildren().add(vBox);
     }
+
 
 }
