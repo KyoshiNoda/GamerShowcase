@@ -2,11 +2,12 @@ package com.example.frontend.controllers;
 
 import com.example.frontend.Game;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -24,23 +25,32 @@ public class MainPageController {
     @FXML private StackPane gameCard8;
     @FXML private StackPane gameCard9;
 
-    private ArrayList<Game> games; // List to store the retrieved games
+    private ArrayList<Game> games;
 
     @FXML
     private void initialize() {
         try {
-            // Fetch games using your getGames() method
             games = getGames();
-
-            // Initialize each game card with the corresponding game data
             for (int i = 0; i < Math.min(games.size(), 9); i++) {
                 Game game = games.get(i);
-                StackPane cardPane = getCardPaneByIndex(i + 1); // Assuming your IDs are numbered from 1
+                StackPane cardPane = getCardPaneByIndex(i + 1);
                 initGameCard(cardPane, game);
+                setGameCardClickHandler(cardPane, game);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void setGameCardClickHandler(StackPane cardPane, Game game) {
+        cardPane.setOnMouseClicked(event -> {
+            handleGameCardClick(game);
+        });
+    }
+
+    // This will change view to detailedGameView
+    private void handleGameCardClick(Game game) {
+        System.out.println("Clicked game ID: " + game.getId());
     }
 
     private StackPane getCardPaneByIndex(int index) {
@@ -63,13 +73,24 @@ public class MainPageController {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             try {
                 ImageView imageView = new ImageView(new Image(imageUrl));
-                imageView.setFitHeight(150.0);
-                imageView.setFitWidth(200.0);
+                imageView.setFitWidth(200);
+                imageView.setFitHeight(150);
 
                 Label nameLabel = new Label(game.getName());
-                nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16.0;");
 
-                cardPane.getChildren().addAll(imageView, nameLabel);
+                VBox vBox = new VBox(10);
+                vBox.setAlignment(Pos.CENTER);
+                vBox.getChildren().addAll(imageView, nameLabel);
+                vBox.setPrefSize(200, 300);
+                vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
+                            Color.BLACK,
+                            BorderStrokeStyle.SOLID,
+                            CornerRadii.EMPTY,
+                            new BorderWidths(1)
+                        )
+                    )
+                );
+                cardPane.getChildren().add(vBox);
             } catch (Exception e) {
                 e.printStackTrace();
                 setDefaultCardImage(cardPane);
@@ -79,15 +100,31 @@ public class MainPageController {
         }
     }
 
+
+
     private void setDefaultCardImage(StackPane cardPane) {
         String defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXGl68Y0oCfYlx18OswvBI5QNYjr7bHdCCUvAf8lHeig&s";
+
         ImageView defaultImageView = new ImageView(new Image(defaultImageUrl));
         defaultImageView.setFitHeight(150.0);
         defaultImageView.setFitWidth(200.0);
 
         Label nameLabel = new Label("Default Game");
-        nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 16.0;");
 
-        cardPane.getChildren().addAll(defaultImageView, nameLabel);
+        VBox vBox = new VBox(10);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.getChildren().addAll(defaultImageView, nameLabel);
+        vBox.setPrefSize(200, 300);
+        vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
+                    Color.BLACK,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,
+                    new BorderWidths(1)
+                )
+            )
+        );
+
+        cardPane.getChildren().add(vBox);
     }
+
 }
