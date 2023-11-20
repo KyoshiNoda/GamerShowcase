@@ -5,8 +5,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
 import javafx.scene.Parent;
+
+import java.io.IOException;
+
+
 
 public class App extends Application {
     public static Firestore db;
@@ -20,7 +23,7 @@ public class App extends Application {
        db = FirebaseConfig.initialize();
        auth = FirebaseAuth.getInstance();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Settings.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Settings.fxml"));
         scene = new Scene(loadFXML("Settings"), 640, 480);
         stage.setTitle("GamerShowcase!");
         stage.setScene(scene);
