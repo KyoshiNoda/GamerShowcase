@@ -33,24 +33,34 @@ public class MainPageController {
     @FXML private StackPane gameCard7;
     @FXML private StackPane gameCard8;
     @FXML private StackPane gameCard9;
+    @FXML private Button nextButton;
+    @FXML private Button prevButton;
 
     private ArrayList<Game> games;
     private User currentUser;
 
+    private int currentPage = 1; // Track the current page
+
+
     @FXML
     private void initialize() {
-        try {
-            games = getGames();
-            for (int i = 0; i < Math.min(games.size(), 9); i++) {
-                Game game = games.get(i);
-                StackPane cardPane = getCardPaneByIndex(i + 1);
-                initGameCard(cardPane, game);
-                setGameCardClickHandler(cardPane, game);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        updateGameCards();
+    }
+
+    @FXML
+    private void handleNextButton() {
+        currentPage++;
+        updateGameCards();
+    }
+
+    @FXML
+    private void handlePrevButton() {
+        if (currentPage > 1) {
+            currentPage--;
+            updateGameCards();
         }
     }
+
 
     @FXML
     void setUserData(User user) {
@@ -61,6 +71,25 @@ public class MainPageController {
             currentGame.print();
         }
     }
+
+    private void updateGameCards() {
+        try {
+            games = getGames(currentPage);
+            for (int i = 0; i < Math.min(games.size(), 9); i++) {
+                Game game = games.get(i);
+                StackPane cardPane = getCardPaneByIndex(i + 1);
+
+                // Clear the existing content before initializing the new content
+                cardPane.getChildren().clear();
+
+                initGameCard(cardPane, game);
+                setGameCardClickHandler(cardPane, game);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void setGameCardClickHandler(StackPane cardPane, Game game) {
         cardPane.setOnMouseClicked(event -> {

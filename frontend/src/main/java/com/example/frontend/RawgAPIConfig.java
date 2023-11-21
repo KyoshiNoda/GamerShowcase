@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class RawgAPIConfig {
-    public static ArrayList<Game> getGames() throws Exception {
+    public static ArrayList<Game> getGames(int page) throws Exception {
         String apiKey = System.getenv("RAWG_API_KEY");
         ArrayList<Game> games = new ArrayList<>();
 
@@ -18,8 +18,13 @@ public class RawgAPIConfig {
             throw new Exception("API key not found in environment variables");
         }
 
-        String apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=20&ordering=-metacritic";
-
+        String apiUrl;
+        if (page == 1) {
+            // For the first page, no 'page' parameter is needed
+            apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=9";
+        } else {
+            apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=9&page=" + page;
+        }
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
