@@ -35,4 +35,13 @@ public class User {
     public String getLastName() { return lastName; }
     public String getEmail() { return email; }
     public ArrayList<Game> getFavGames() { return favGames; }
+
+    public boolean gameExists(Game potentialGame) {
+        for (Game game : favGames) {
+            if (game.getId() == potentialGame.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -9,6 +9,7 @@ import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
 import static com.example.frontend.RawgAPIConfig.getGames;
 
 public class MainPageController {
@@ -103,7 +103,7 @@ public class MainPageController {
                 vBox.getChildren().addAll(imageView, nameLabel);
 
                 Button favoriteButton = new Button("Favorite Game");
-                favoriteButton.setOnAction(event -> handleFavoriteButtonClick(game));
+                favoriteButton.setOnAction(event -> addFavoriteGame(game));
 
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
@@ -118,45 +118,47 @@ public class MainPageController {
                 cardPane.getChildren().add(vBox);
             } catch (Exception e) {
                 e.printStackTrace();
-                setDefaultCardImage(cardPane);
+                setDefaultCardImage(cardPane, game);
             }
         } else {
-            setDefaultCardImage(cardPane);
+            setDefaultCardImage(cardPane,game);
         }
     }
 
-    private void handleFavoriteButtonClick(Game game) {
-        currentUser.getFavGames().add(game);
-
-        DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
-        Map<String, Object> updateData = new HashMap<>();
-        updateData.put("favGames", currentUser.getFavGames());
-        try {
-            ApiFuture<WriteResult> updateFuture = userRef.set(updateData, SetOptions.merge());
-            updateFuture.get();
-            System.out.println("Firestore update successful");
-        } catch (InterruptedException | ExecutionException e) {
-            System.out.println("Firestore update failed: " + e.getMessage());
+    private void addFavoriteGame(Game game) {
+        if (!currentUser.gameExists(game)){
+            currentUser.getFavGames().add(game);
+            DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
+            Map<String, Object> updateData = new HashMap<>();
+            updateData.put("favGames", currentUser.getFavGames());
+            try {
+                ApiFuture<WriteResult> updateFuture = userRef.set(updateData, SetOptions.merge());
+                updateFuture.get();
+                showAlert("Game added to favorites successfully", Alert.AlertType.INFORMATION);
+            } catch (InterruptedException | ExecutionException e) {
+                showAlert("Failed to add game to favorites. Please try again.", Alert.AlertType.ERROR);
+            }
+        } else {
+            showAlert("Already Favorited Game!", Alert.AlertType.ERROR);
         }
     }
 
 
-    private void setDefaultCardImage(StackPane cardPane) {
+    private void setDefaultCardImage(StackPane cardPane, Game game) {
         String defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXGl68Y0oCfYlx18OswvBI5QNYjr7bHdCCUvAf8lHeig&s";
 
         ImageView defaultImageView = new ImageView(new Image(defaultImageUrl));
         defaultImageView.setFitHeight(150.0);
         defaultImageView.setFitWidth(200.0);
 
-        Label nameLabel = new Label("Default Game");
+        Label nameLabel = new Label(game.getName());
 
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(defaultImageView, nameLabel);
 
-        // Add Favorite Game button
         Button favoriteButton = new Button("Favorite Game");
-//        favoriteButton.setOnAction(event -> handleFavoriteButtonClick(null));
+        favoriteButton.setOnAction(event -> addFavoriteGame(game));
         vBox.getChildren().add(favoriteButton);
 
         vBox.setPrefSize(200, 300);
@@ -170,5 +172,12 @@ public class MainPageController {
         );
 
         cardPane.getChildren().add(vBox);
+    }
+    private void showAlert(String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle("Favorite Game Status");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
