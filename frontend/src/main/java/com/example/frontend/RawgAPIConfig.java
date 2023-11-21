@@ -5,7 +5,6 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

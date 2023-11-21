@@ -5,6 +5,7 @@ import com.example.frontend.Game;
 import com.example.frontend.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -15,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.frontend.RawgAPIConfig.getGames;
@@ -122,18 +125,21 @@ public class MainPageController {
         }
     }
 
-    // New method to handle button clicks
     private void handleFavoriteButtonClick(Game game) {
         currentUser.getFavGames().add(game);
+
         DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
+        Map<String, Object> updateData = new HashMap<>();
+        updateData.put("favGames", currentUser.getFavGames());
         try {
-            ApiFuture<WriteResult> updateFuture = userRef.update("favGames", currentUser.getFavGames());
+            ApiFuture<WriteResult> updateFuture = userRef.set(updateData, SetOptions.merge());
             updateFuture.get();
             System.out.println("Firestore update successful");
         } catch (InterruptedException | ExecutionException e) {
             System.out.println("Firestore update failed: " + e.getMessage());
         }
     }
+
 
     private void setDefaultCardImage(StackPane cardPane) {
         String defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXGl68Y0oCfYlx18OswvBI5QNYjr7bHdCCUvAf8lHeig&s";
