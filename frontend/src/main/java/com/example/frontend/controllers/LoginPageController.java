@@ -2,6 +2,7 @@ package com.example.frontend.controllers;
 
 import com.example.frontend.App;
 import com.example.frontend.Game;
+import com.example.frontend.User;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,15 +36,18 @@ public class LoginPageController {
                 String storedHashedPassword = userSnapshot.getString("password");
 
                 if (BCrypt.checkpw(password, storedHashedPassword)) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
-                    Parent root = loader.load();
-                    MainPageController mainPageController = loader.getController();
-                    mainPageController.setUserData(
+                    User currentUser = new User(
+                            userSnapshot.getId(),
                             userSnapshot.getString("firstName"),
                             userSnapshot.getString("lastName"),
                             userSnapshot.getString("email"),
                             parseFavGames(userSnapshot.get("favGames"))
                     );
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
+                    Parent root = loader.load();
+                    MainPageController mainPageController = loader.getController();
+                    mainPageController.setUserData(currentUser);
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) emailField.getScene().getWindow();
                     stage.setScene(scene);

@@ -91,5 +91,17 @@ public class Game {
         this.background_image = background_image;
     }
 
+    public void print() {
+        System.out.println("Game ID: " + id);
+        System.out.println("Game Name: " + name);
+        System.out.println("Game Image: " + background_image);
+        System.out.println("Game ESRB: " +  esrb);
+        System.out.println("Game Rating: " +  rating);
+        System.out.println("Game Released: " +  released);
+        System.out.println("Game Platforms:");
+        for (String platform : platforms) {
+            System.out.println("\t" + platform);
+        }
+    }
 
 }

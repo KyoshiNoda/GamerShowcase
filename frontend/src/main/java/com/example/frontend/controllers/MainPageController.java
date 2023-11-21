@@ -1,6 +1,11 @@
 package com.example.frontend.controllers;
 
+import com.example.frontend.App;
 import com.example.frontend.Game;
+import com.example.frontend.User;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import static com.example.frontend.RawgAPIConfig.getGames;
 
 public class MainPageController {
@@ -25,6 +32,7 @@ public class MainPageController {
     @FXML private StackPane gameCard9;
 
     private ArrayList<Game> games;
+    private User currentUser;
 
     @FXML
     private void initialize() {
@@ -42,22 +50,12 @@ public class MainPageController {
     }
 
     @FXML
-    void setUserData(String firstName, String lastName, String email, ArrayList<Game> favGames) {
-        System.out.println("firstName: " + firstName);
-        System.out.println("lastName: " + lastName);
-        System.out.println("Email: " + email);
-        for (Game currentGame : favGames) {
-            System.out.println(currentGame.getId());
-            System.out.println(currentGame.getName());
-            System.out.println(currentGame.getEsrb());
-            System.out.println(currentGame.getBackground_image());
-            System.out.println(currentGame.getRating());
-            System.out.println(currentGame.getReleased());
-
-            System.out.println("Game Platforms:");
-            for (String platform : currentGame.getPlatforms()) {
-                System.out.println("\t" + platform);
-            }
+    void setUserData(User user) {
+        this.currentUser = user;
+        System.out.println("ID: " + currentUser.getId());
+        System.out.println("Favorite Games:");
+        for (Game currentGame : currentUser.getFavGames()) {
+            currentGame.print();
         }
     }
 
@@ -107,12 +105,12 @@ public class MainPageController {
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                                Color.BLACK,
-                                BorderStrokeStyle.SOLID,
-                                CornerRadii.EMPTY,
-                                new BorderWidths(1)
+                            Color.BLACK,
+                            BorderStrokeStyle.SOLID,
+                            CornerRadii.EMPTY,
+                            new BorderWidths(1)
                         )
-                        )
+                    )
                 );
                 cardPane.getChildren().add(vBox);
             } catch (Exception e) {
@@ -126,7 +124,15 @@ public class MainPageController {
 
     // New method to handle button clicks
     private void handleFavoriteButtonClick(Game game) {
-        System.out.println("Favorite button clicked for game: " + game.getName());
+        currentUser.getFavGames().add(game);
+        DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
+        try {
+            ApiFuture<WriteResult> updateFuture = userRef.update("favGames", currentUser.getFavGames());
+            updateFuture.get();
+            System.out.println("Firestore update successful");
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Firestore update failed: " + e.getMessage());
+        }
     }
 
     private void setDefaultCardImage(StackPane cardPane) {
@@ -149,12 +155,12 @@ public class MainPageController {
 
         vBox.setPrefSize(200, 300);
         vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                        Color.BLACK,
-                        BorderStrokeStyle.SOLID,
-                        CornerRadii.EMPTY,
-                        new BorderWidths(1)
+                    Color.BLACK,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,
+                    new BorderWidths(1)
                 )
-                )
+            )
         );
 
         cardPane.getChildren().add(vBox);
