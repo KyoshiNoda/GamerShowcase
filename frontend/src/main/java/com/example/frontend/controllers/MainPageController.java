@@ -33,35 +33,11 @@ public class MainPageController {
     @FXML private StackPane gameCard7;
     @FXML private StackPane gameCard8;
     @FXML private StackPane gameCard9;
-    @FXML private Button nextButton;
-    @FXML private Button prevButton;
 
     private ArrayList<Game> games;
     private User currentUser;
-
-    private int currentPage = 1; // Track the current page
-
-
-    @FXML
-    private void initialize() {
-        updateGameCards();
-    }
-
-    @FXML
-    private void handleNextButton() {
-        currentPage++;
-        updateGameCards();
-    }
-
-    @FXML
-    private void handlePrevButton() {
-        if (currentPage > 1) {
-            currentPage--;
-            updateGameCards();
-        }
-    }
-
-
+    private int currentPage = 1;
+    @FXML private void initialize() { updateGameCards(); }
     @FXML
     void setUserData(User user) {
         this.currentUser = user;
@@ -72,50 +48,6 @@ public class MainPageController {
         }
     }
 
-    private void updateGameCards() {
-        try {
-            games = getGames(currentPage);
-            for (int i = 0; i < Math.min(games.size(), 9); i++) {
-                Game game = games.get(i);
-                StackPane cardPane = getCardPaneByIndex(i + 1);
-
-                // Clear the existing content before initializing the new content
-                cardPane.getChildren().clear();
-
-                initGameCard(cardPane, game);
-                setGameCardClickHandler(cardPane, game);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void setGameCardClickHandler(StackPane cardPane, Game game) {
-        cardPane.setOnMouseClicked(event -> {
-            handleGameCardClick(game);
-        });
-    }
-
-    // This will change view to detailedGameView
-    private void handleGameCardClick(Game game) {
-        System.out.println("Clicked game ID: " + game.getId());
-    }
-
-    private StackPane getCardPaneByIndex(int index) {
-        return switch (index) {
-            case 1 -> gameCard1;
-            case 2 -> gameCard2;
-            case 3 -> gameCard3;
-            case 4 -> gameCard4;
-            case 5 -> gameCard5;
-            case 6 -> gameCard6;
-            case 7 -> gameCard7;
-            case 8 -> gameCard8;
-            case 9 -> gameCard9;
-            default -> null;
-        };
-    }
     private void initGameCard(StackPane cardPane, Game game) {
         String imageUrl = game.getBackground_image();
 
@@ -137,12 +69,12 @@ public class MainPageController {
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                            Color.BLACK,
-                            BorderStrokeStyle.SOLID,
-                            CornerRadii.EMPTY,
-                            new BorderWidths(1)
+                                Color.BLACK,
+                                BorderStrokeStyle.SOLID,
+                                CornerRadii.EMPTY,
+                                new BorderWidths(1)
                         )
-                    )
+                        )
                 );
                 cardPane.getChildren().add(vBox);
             } catch (Exception e) {
@@ -172,6 +104,46 @@ public class MainPageController {
         }
     }
 
+    private void updateGameCards() {
+        try {
+            games = getGames(currentPage);
+            for (int i = 0; i < Math.min(games.size(), 9); i++) {
+                Game game = games.get(i);
+                StackPane cardPane = getCardPaneByIndex(i + 1);
+                cardPane.getChildren().clear();
+                initGameCard(cardPane, game);
+                setGameCardClickHandler(cardPane, game);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setGameCardClickHandler(StackPane cardPane, Game game) {
+        cardPane.setOnMouseClicked(event -> {
+            handleGameCardClick(game);
+        });
+    }
+
+    // This will change view to detailedGameView
+    private void handleGameCardClick(Game game) {
+        System.out.println("Clicked game ID: " + game.getId());
+    }
+
+    private StackPane getCardPaneByIndex(int index) {
+        return switch (index) {
+            case 1 -> gameCard1;
+            case 2 -> gameCard2;
+            case 3 -> gameCard3;
+            case 4 -> gameCard4;
+            case 5 -> gameCard5;
+            case 6 -> gameCard6;
+            case 7 -> gameCard7;
+            case 8 -> gameCard8;
+            case 9 -> gameCard9;
+            default -> null;
+        };
+    }
 
     private void setDefaultCardImage(StackPane cardPane, Game game) {
         String defaultImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXGl68Y0oCfYlx18OswvBI5QNYjr7bHdCCUvAf8lHeig&s";
@@ -192,16 +164,31 @@ public class MainPageController {
 
         vBox.setPrefSize(200, 300);
         vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                    Color.BLACK,
-                    BorderStrokeStyle.SOLID,
-                    CornerRadii.EMPTY,
-                    new BorderWidths(1)
+                        Color.BLACK,
+                        BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY,
+                        new BorderWidths(1)
                 )
-            )
+                )
         );
 
         cardPane.getChildren().add(vBox);
     }
+
+    @FXML
+    private void handleNextButton() {
+        currentPage++;
+        updateGameCards();
+    }
+
+    @FXML
+    private void handlePrevButton() {
+        if (currentPage > 1) {
+            currentPage--;
+            updateGameCards();
+        }
+    }
+
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle("Favorite Game Status");
