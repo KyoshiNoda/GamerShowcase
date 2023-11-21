@@ -69,12 +69,12 @@ public class MainPageController {
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                                Color.BLACK,
-                                BorderStrokeStyle.SOLID,
-                                CornerRadii.EMPTY,
-                                new BorderWidths(1)
+                            Color.BLACK,
+                            BorderStrokeStyle.SOLID,
+                            CornerRadii.EMPTY,
+                            new BorderWidths(1)
                         )
-                        )
+                    )
                 );
                 cardPane.getChildren().add(vBox);
             } catch (Exception e) {
@@ -164,12 +164,12 @@ public class MainPageController {
 
         vBox.setPrefSize(200, 300);
         vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
-                        Color.BLACK,
-                        BorderStrokeStyle.SOLID,
-                        CornerRadii.EMPTY,
-                        new BorderWidths(1)
+                    Color.BLACK,
+                    BorderStrokeStyle.SOLID,
+                    CornerRadii.EMPTY,
+                    new BorderWidths(1)
                 )
-                )
+            )
         );
 
         cardPane.getChildren().add(vBox);
