@@ -8,19 +8,17 @@ import com.example.frontend.controllers.user_setting.ChangePasswordController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SettingPageController {
-
-    @FXML private TextField Name_Box;
+    @FXML private Label nameBox;
     @FXML private User currentUser;
 
     public void setUserData(User currentUser) {
         this.currentUser = currentUser;
     }
-
     @FXML
     protected void Return_To_Main_Page() {
         loadScene("/com/example/frontend/setting-page.fxml");
@@ -45,7 +43,7 @@ public class SettingPageController {
                     changeEmailController.setUserData(currentUser);
                 }
             }
-            Stage stage = (Stage) Name_Box.getScene().getWindow();
+            Stage stage = (Stage) nameBox.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
