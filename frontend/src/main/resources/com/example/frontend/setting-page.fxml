@@ -30,22 +30,22 @@
             <Font name="Times New Roman" size="28.0" />
          </font>
       </Label>
-      <Button fx:id="Change_First_Name_Button" layoutX="11.0" layoutY="175.0" mnemonicParsing="false" onAction="#Go_To_Change_First_Name" text="Change first name">
+      <Button layoutX="11.0" layoutY="175.0" mnemonicParsing="false" onAction="#changeFirstName" text="Change first name">
          <font>
             <Font name="Times New Roman" size="28.0" />
          </font>
       </Button>
-      <Button fx:id="Change_Last_Name_Button" layoutX="340.0" layoutY="175.0" mnemonicParsing="false" onAction="#Go_To_Change_Last_Name" text="Change Last name">
+      <Button layoutX="340.0" layoutY="175.0" mnemonicParsing="false" onAction="#changeLastName" text="Change Last name">
          <font>
             <Font name="Times New Roman" size="28.0" />
          </font>
       </Button>
-      <Button fx:id="Change_Username_Button" layoutX="11.0" layoutY="250.0" mnemonicParsing="false" onAction="#Go_To_Change_Username" text="Change Username">
+      <Button layoutX="11.0" layoutY="250.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password">
          <font>
             <Font name="Times New Roman" size="28.0" />
          </font>
       </Button>
-      <Button fx:id="Change_Email_Button" layoutX="340.0" layoutY="250.0" mnemonicParsing="false" onAction="#Go_To_Change_Email" text="Change Email">
+      <Button layoutX="340.0" layoutY="250.0" mnemonicParsing="false" onAction="#changeEmail" text="Change Email">
          <font>
             <Font name="Times New Roman" size="28.0" />
          </font>

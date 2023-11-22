@@ -1,4 +1,4 @@
-package com.example.frontend.controllers;
+package com.example.frontend.controllers.user_setting;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,13 +8,12 @@ import java.io.IOException;
 
 public class ChangeLastNameController {
 
-    @FXML
-    private Button Back_Button;
+    @FXML private Button backButton;
 
-    @FXML
-    private Button Save_New_Last_Name_Button;
+    @FXML private Button saveButton;
 
-    public void Save_New_Last_Name() throws IOException {
+    public void saveLastNameHandler() throws IOException {
+
     }
 
     public void BackHandler() throws IOException {

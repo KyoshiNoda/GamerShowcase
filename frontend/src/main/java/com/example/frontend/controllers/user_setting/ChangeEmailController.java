@@ -1,20 +1,21 @@
-package com.example.frontend.controllers;
+package com.example.frontend.controllers.user_setting;
 
-import com.example.frontend.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import com.example.frontend.App;
 
 import java.io.IOException;
 
-public class ChangeUsernameController {
+public class ChangeEmailController {
 
     @FXML
     private Button Back_Button;
 
     @FXML
-    private Button Save_New_Username_Button;
+    private Button Save_New_Email_Button;
 
-    public void Save_New_Username() throws IOException {
+
+    public void saveEmailHandler() throws IOException {
     }
 
     public void BackHandler() throws IOException {

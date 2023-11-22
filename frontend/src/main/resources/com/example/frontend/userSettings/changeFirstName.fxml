@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.ChangeFirstNameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.user_setting.ChangeFirstNameController">
    <children>
       <Label layoutX="18.0" layoutY="89.0" text="Current First Name:">
          <font>
@@ -28,7 +28,7 @@
             <Font name="Times New Roman" size="28.0" />
          </font>
       </TextField>
-      <Button fx:id="Save_New_First_Name_Button" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#Save_New_First_Name" text="Save">
+      <Button fx:id="Save_New_First_Name_Button" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveFirstNameHandler" text="Save">
          <font>
             <Font name="Times New Roman" size="28.0" />
          </font>
