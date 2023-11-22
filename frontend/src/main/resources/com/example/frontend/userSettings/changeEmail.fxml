@@ -18,22 +18,22 @@
                 <Font name="Times New Roman" size="28.0" />
             </font>
         </Label>
-        <TextField fx:id="Current_Email_Field" layoutX="260.0" layoutY="80.0">
+        <Label fx:id="currentEmail" layoutX="260.0" layoutY="80.0">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Label>
+        <TextField fx:id="newEmail" layoutX="260.0" layoutY="175.0">
             <font>
                 <Font name="Times New Roman" size="28.0" />
             </font>
         </TextField>
-        <TextField fx:id="New_Email_Field" layoutX="260.0" layoutY="175.0">
-            <font>
-                <Font name="Times New Roman" size="28.0" />
-            </font>
-        </TextField>
-        <Button fx:id="Save_New_Email_Button" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveEmailHandler" text="Save">
+        <Button fx:id="" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveEmailHandler" text="Save">
             <font>
                 <Font name="Times New Roman" size="28.0" />
             </font>
         </Button>
-        <Button fx:id="Back_Button" layoutX="503.0" layoutY="336.0" mnemonicParsing="false" onAction="#BackHandler" text="Back">
+        <Button fx:id="backButton" layoutX="503.0" layoutY="336.0" mnemonicParsing="false" onAction="#BackHandler" text="Back">
             <font>
                 <Font name="Times New Roman" size="28.0" />
             </font>

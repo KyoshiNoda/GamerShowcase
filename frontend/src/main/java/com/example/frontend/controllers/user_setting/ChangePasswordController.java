@@ -4,26 +4,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import com.example.frontend.App;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class ChangeEmailController {
-    @FXML private Label currentEmail;
-    @FXML private TextField newEmail;
+public class ChangePasswordController {
+    @FXML private PasswordField currentPassword;
+    @FXML private PasswordField newPassword;
     @FXML private Button backButton;
 
-
-    @FXML private void initialize() {
-        currentEmail.setText("kyoshisew@gmail.com");
-    }
-
     @FXML
-    public void saveEmailHandler() throws IOException {
-        currentEmail.setText(newEmail.getText());
+    public void savePasswordHandler() throws IOException {
+       System.out.println("New Password Saved!");
     }
 
     @FXML
