@@ -8,8 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class WelcomePageController {
-    @FXML
-    private Label welcomeText;
+    @FXML private Label welcomeText;
 
     @FXML
     protected void loginPageHandler() {
