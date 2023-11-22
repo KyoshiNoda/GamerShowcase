@@ -22,5 +22,6 @@
    <HBox alignment="CENTER">
       <Button text="Previous" onAction="#handlePrevButton"/>
       <Button text="Next" onAction="#handleNextButton"/>
+      <Button text= "Setting" onAction = "#userSettingPage"/>
    </HBox>
 </VBox>
