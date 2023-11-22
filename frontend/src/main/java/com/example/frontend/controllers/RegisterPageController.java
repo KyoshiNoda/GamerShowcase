@@ -4,13 +4,11 @@ import com.example.frontend.App;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.firebase.auth.UserRecord;
 import org.mindrot.jbcrypt.BCrypt;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +52,7 @@ public class RegisterPageController {
         }
     }
 
-    private String createUserInFirebase(String email, String hashedPassword) throws Exception {
+    private String createUserInFirebase(String email, String hashedPassword) {
         try {
             UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                     .setEmail(email)

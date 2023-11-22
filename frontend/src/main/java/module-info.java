@@ -11,8 +11,7 @@ module com.example.frontend {
     requires com.google.gson;
     requires jbcrypt;
 
-
-    opens com.example.frontend to javafx.fxml;
+    opens com.example.frontend to javafx.fxml, google.cloud.firestore; // Open to both modules
     exports com.example.frontend;
     exports com.example.frontend.controllers;
     opens com.example.frontend.controllers to javafx.fxml;

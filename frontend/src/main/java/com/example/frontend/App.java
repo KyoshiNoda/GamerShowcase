@@ -20,11 +20,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       db = FirebaseConfig.initialize();
-       auth = FirebaseAuth.getInstance();
-
-        //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Settings.fxml"));
-        scene = new Scene(loadFXML("Settings"), 640, 480);
+        db = FirebaseConfig.initialize();
+        auth = FirebaseAuth.getInstance();
+      
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("welcome-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("GamerShowcase!");
         stage.setScene(scene);
         stage.show();
