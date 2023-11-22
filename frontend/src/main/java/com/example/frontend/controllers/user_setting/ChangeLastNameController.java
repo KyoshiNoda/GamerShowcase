@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import com.example.frontend.App;
 import javafx.scene.control.Label;
@@ -42,11 +43,12 @@ public class ChangeLastNameController {
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("lastName", updatedFirstName);
                     userRef.set(updates, com.google.cloud.firestore.SetOptions.merge());
-                    System.out.println("Last name updated successfully!");
+                    showAlert("Last name updated successfully!", Alert.AlertType.INFORMATION);
                 } else {
-                    System.out.println("User not found in Firestore.");
+                    showAlert("User not found in Firestore.", Alert.AlertType.ERROR);
                 }
             } catch (Exception e) {
+                showAlert("An error occurred while updating the last name.", Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
         }
@@ -66,5 +68,13 @@ public class ChangeLastNameController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void showAlert(String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle("Update Status");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
