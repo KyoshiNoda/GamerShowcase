@@ -32,17 +32,18 @@ public class ChangeEmailController {
 
     @FXML
     public void saveEmailHandler() throws IOException {
-        String updatedFirstName = newEmail.getText();
+        String updatedEmail = newEmail.getText();
 
-        if (!updatedFirstName.isEmpty()) {
-            currentEmail.setText(updatedFirstName);
+        if (!updatedEmail.isEmpty()) {
+            currentEmail.setText(updatedEmail);
             try {
                 DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("email", updatedFirstName);
+                    updates.put("email", updatedEmail);
                     userRef.set(updates, com.google.cloud.firestore.SetOptions.merge());
+                    currentUser.setEmail(updatedEmail);
                     showAlert("Email updated successfully!", Alert.AlertType.INFORMATION);
                 } else {
                     showAlert("User not found in Firestore.", Alert.AlertType.ERROR);

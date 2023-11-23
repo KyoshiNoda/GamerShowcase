@@ -32,17 +32,18 @@ public class ChangeLastNameController {
 
     @FXML
     public void saveLastNameHandler() throws IOException {
-        String updatedFirstName = newLastName.getText();
+        String updatedLastName = newLastName.getText();
 
-        if (!updatedFirstName.isEmpty()) {
-            currentLastName.setText(updatedFirstName);
+        if (!updatedLastName.isEmpty()) {
+            currentLastName.setText(updatedLastName);
             try {
                 DocumentReference userRef = App.db.collection("Users").document(currentUser.getId());
                 DocumentSnapshot userSnapshot = userRef.get().get();
                 if (userSnapshot.exists()) {
                     Map<String, Object> updates = new HashMap<>();
-                    updates.put("lastName", updatedFirstName);
+                    updates.put("lastName", updatedLastName);
                     userRef.set(updates, com.google.cloud.firestore.SetOptions.merge());
+                    currentUser.setLastName(updatedLastName);
                     showAlert("Last name updated successfully!", Alert.AlertType.INFORMATION);
                 } else {
                     showAlert("User not found in Firestore.", Alert.AlertType.ERROR);

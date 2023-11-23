@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class SettingPageController {
@@ -19,9 +20,10 @@ public class SettingPageController {
     public void setUserData(User currentUser) {
         this.currentUser = currentUser;
     }
+
     @FXML
     protected void Return_To_Main_Page() {
-        loadScene("/com/example/frontend/setting-page.fxml");
+        loadScene("/com/example/frontend/main-page.fxml");
     }
 
     private void loadScene(String fxmlPath) {
@@ -29,24 +31,24 @@ public class SettingPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load(), 600, 400);
 
-            switch (fxmlPath) {
-                case "/com/example/frontend/userSettings/changeFirstName.fxml" -> {
-                    ChangeFirstNameController changeFirstNameController = loader.getController();
-                    changeFirstNameController.setUserData(currentUser);
-                }
-                case "/com/example/frontend/userSettings/changeLastName.fxml" -> {
-                    ChangeLastNameController changeLastNameController = loader.getController();
-                    changeLastNameController.setUserData(currentUser);
-                }
-                case "/com/example/frontend/userSettings/changeEmail.fxml" -> {
-                    ChangeEmailController changeEmailController = loader.getController();
-                    changeEmailController.setUserData(currentUser);
-                }
-                case "/com/example/frontend/userSettings/changePassword.fxml" -> {
-                    ChangePasswordController changeEmailController = loader.getController();
-                    changeEmailController.setUserData(currentUser);
-                }
+            // Pass the current user to the loaded controller
+            if (loader.getController() instanceof MainPageController) {
+                MainPageController mainPageController = loader.getController();
+                mainPageController.setUserData(currentUser);
+            } else if (loader.getController() instanceof ChangeFirstNameController) {
+                ChangeFirstNameController changeFirstNameController = loader.getController();
+                changeFirstNameController.setUserData(currentUser);
+            } else if (loader.getController() instanceof ChangeLastNameController) {
+                ChangeLastNameController changeLastNameController = loader.getController();
+                changeLastNameController.setUserData(currentUser);
+            } else if (loader.getController() instanceof ChangeEmailController) {
+                ChangeEmailController changeEmailController = loader.getController();
+                changeEmailController.setUserData(currentUser);
+            } else if (loader.getController() instanceof ChangePasswordController) {
+                ChangePasswordController changePasswordController = loader.getController();
+                changePasswordController.setUserData(currentUser);
             }
+
             Stage stage = (Stage) nameBox.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {

@@ -43,6 +43,7 @@ public class ChangeFirstNameController {
                     Map<String, Object> updates = new HashMap<>();
                     updates.put("firstName", updatedFirstName);
                     userRef.set(updates, com.google.cloud.firestore.SetOptions.merge());
+                    currentUser.setFirstName(updatedFirstName);
                     showAlert("First name updated successfully!", Alert.AlertType.INFORMATION);
                 } else {
                     showAlert("User not found in Firestore.", Alert.AlertType.ERROR);
@@ -53,7 +54,6 @@ public class ChangeFirstNameController {
             }
         }
     }
-
 
     @FXML
     public void BackHandler() throws IOException {

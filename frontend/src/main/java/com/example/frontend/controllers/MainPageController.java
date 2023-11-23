@@ -47,11 +47,6 @@ public class MainPageController {
     @FXML
     void setUserData(User user) {
         this.currentUser = user;
-        System.out.println("ID: " + currentUser.getId());
-        System.out.println("Favorite Games:");
-        for (Game currentGame : currentUser.getFavGames()) {
-            currentGame.print();
-        }
     }
 
     private void initGameCard(StackPane cardPane, Game game) {
