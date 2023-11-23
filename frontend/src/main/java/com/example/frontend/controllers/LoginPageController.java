@@ -40,6 +40,7 @@ public class LoginPageController {
                             userSnapshot.getString("firstName"),
                             userSnapshot.getString("lastName"),
                             userSnapshot.getString("email"),
+                            userSnapshot.getString("password"),
                             parseFavGames(userSnapshot.get("favGames"))
                     );
 

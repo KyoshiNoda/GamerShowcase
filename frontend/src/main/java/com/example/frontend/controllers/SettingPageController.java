@@ -42,6 +42,10 @@ public class SettingPageController {
                     ChangeEmailController changeEmailController = loader.getController();
                     changeEmailController.setUserData(currentUser);
                 }
+                case "/com/example/frontend/userSettings/changePassword.fxml" -> {
+                    ChangePasswordController changeEmailController = loader.getController();
+                    changeEmailController.setUserData(currentUser);
+                }
             }
             Stage stage = (Stage) nameBox.getScene().getWindow();
             stage.setScene(scene);
