@@ -202,6 +202,18 @@ public class MainPageController {
         stage.show();
     }
 
+    @FXML
+    void userFavGamesPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/favGames-page.fxml"));
+        Parent root = loader.load();
+        FavGamesPageController favGamesPageController = loader.getController();
+        favGamesPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
