@@ -15,4 +15,6 @@ module com.example.frontend {
     exports com.example.frontend;
     exports com.example.frontend.controllers;
     opens com.example.frontend.controllers to javafx.fxml;
+    exports com.example.frontend.controllers.user_setting;
+    opens com.example.frontend.controllers.user_setting to javafx.fxml;
 }
