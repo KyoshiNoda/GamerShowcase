@@ -7,6 +7,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
@@ -15,7 +18,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -85,6 +91,18 @@ public class FavGamesPageController {
                 gamesListView.getItems().setAll(currentUser.getFavGames());
             }
         });
+    }
+
+    @FXML
+    private void goToMainPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
+        Parent root = loader.load();
+        MainPageController mainPageController = loader.getController();
+        mainPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gamesListView.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void showAlert(String message, Alert.AlertType alertType) {

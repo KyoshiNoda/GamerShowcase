@@ -214,7 +214,6 @@ public class MainPageController {
         stage.show();
     }
 
-
     private void showAlert(String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle("Favorite Game Status");

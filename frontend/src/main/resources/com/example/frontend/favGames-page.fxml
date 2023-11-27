@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.frontend.controllers.FavGamesPageController">
-
-    <ListView fx:id="gamesListView" />
-
+<VBox prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.FavGamesPageController">
+    <HBox alignment="CENTER_LEFT">
+        <ListView fx:id="gamesListView" HBox.hgrow="ALWAYS" />
+    </HBox>
+    <Button text="Go Back" onAction="#goToMainPage" />
 </VBox>
