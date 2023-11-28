@@ -6,11 +6,11 @@
 <?import javafx.scene.text.*?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.LoginPageController">
     <center>
         <AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="403.0" prefWidth="300.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField layoutX="14.0" layoutY="143.0" prefHeight="26.0" prefWidth="273.0" text="Username">
+                <TextField fx:id = "emailField" layoutX="14.0" layoutY="143.0" prefHeight="26.0" prefWidth="273.0" text="Email">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
@@ -20,12 +20,12 @@
                         <Font name="PT Mono Bold" size="35.0" />
                     </font>
                 </Text>
-                <TextField layoutX="14.0" layoutY="222.0" prefHeight="26.0" prefWidth="273.0" text="Password">
+                <PasswordField fx:id = "passwordField" layoutX="14.0" layoutY="222.0" prefHeight="26.0" prefWidth="273.0" text="Password">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
-                </TextField>
-                <Button layoutX="99.0" layoutY="332.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: #6A5ACD;" text="Login" textFill="#fffafa">
+                </PasswordField>
+                <Button layoutX="99.0" layoutY="332.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="103.0" style="-fx-background-color: #6A5ACD;" text="Login" textFill="#fffafa" onAction="#loginButtonHandler">
                     <font>
                         <Font name="PT Mono Bold" size="13.0" />
                     </font>

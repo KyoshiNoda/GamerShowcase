@@ -9,11 +9,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.PasswordField?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.RegisterPageController">
     <center>
         <AnchorPane maxHeight="400.0" maxWidth="300.0" minHeight="200.0" minWidth="300.0" prefHeight="403.0" prefWidth="300.0" BorderPane.alignment="CENTER">
             <children>
-                <TextField layoutX="14.0" layoutY="77.0" prefHeight="26.0" prefWidth="273.0" text="First Name">
+                <TextField fx:id="firstNameInput" layoutX="14.0" layoutY="77.0" prefHeight="26.0" prefWidth="273.0" text="First Name">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
@@ -23,27 +24,27 @@
                         <Font name="PT Mono Bold" size="24.0" />
                     </font>
                 </Text>
-                <TextField layoutX="14.0" layoutY="133.0" prefHeight="26.0" prefWidth="273.0" text="Last Name">
+                <TextField fx:id="lastNameInput" layoutX="14.0" layoutY="133.0" prefHeight="26.0" prefWidth="273.0" text="Last Name">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="14.0" layoutY="187.0" prefHeight="26.0" prefWidth="273.0" text="Email">
+                <TextField fx:id="emailInput" layoutX="14.0" layoutY="187.0" prefHeight="26.0" prefWidth="273.0" text="Email">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="14.0" layoutY="244.0" prefHeight="26.0" prefWidth="273.0" text="Password">
+                <PasswordField fx:id="passwordInput" layoutX="14.0" layoutY="244.0" prefHeight="26.0" prefWidth="273.0" text="Password">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
-                </TextField>
-                <TextField layoutX="14.0" layoutY="296.0" prefHeight="26.0" prefWidth="273.0" text="Confirm Password">
+                </PasswordField>
+                <PasswordField fx:id="confirmPasswordInput" layoutX="14.0" layoutY="296.0" prefHeight="26.0" prefWidth="273.0" text="Confirm Password">
                     <font>
                         <Font name="PT Sans" size="13.0" />
                     </font>
-                </TextField>
-                <Button layoutX="99.0" layoutY="359.0" mnemonicParsing="false" style="-fx-background-color: #6A5ACD;" text="Create Account" textFill="#fffafa">
+                </PasswordField>
+                <Button layoutX="99.0" layoutY="359.0" mnemonicParsing="false" style="-fx-background-color: #6A5ACD;" text="Create Account" textFill="#fffafa" onAction="#submitHandler">
                     <font>
                         <Font name="PT Mono Bold" size="13.0" />
                     </font>
