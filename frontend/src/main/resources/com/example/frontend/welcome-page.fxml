@@ -2,30 +2,36 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.WelcomePageController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="700.0" spacing="20.0" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.WelcomePageController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label fx:id="welcomeText" text="Welcome To The Gamer Showcase!" textAlignment="CENTER" wrapText="true">
+    <Label fx:id="welcomeText" prefHeight="74.0" prefWidth="339.0" text="Welcome! " textAlignment="CENTER" textFill="#fffafa" translateX="50.0" translateY="-15.0" wrapText="true">
         <font>
-            <Font name="Times New Roman Bold" size="62.0" />
+            <Font name="PT Mono Bold" size="62.0" />
         </font></Label>
-    <Button onAction="#loginPageHandler" text="Sign In!">
+    <ImageView fitHeight="83.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" translateX="-190.0" translateY="-110.0">
+        <image>
+            <Image url="@../../../hand.png" />
+        </image>
+    </ImageView>
+    <Button onAction="#loginPageHandler" prefHeight="49.0" prefWidth="139.0" style="-fx-background-color: #6A5ACD;" text="Sign In!" textFill="#fff6f6" translateY="-80.0">
         <font>
-            <Font name="Times New Roman" size="21.0" />
+            <Font name="PT Mono Bold" size="21.0" />
         </font></Button>
-    <Label text="New to Gamer Showcase? Create an account!" textAlignment="CENTER" textFill="#0000009c">
+    <Label text="New to Gamer Showcase? Create an account!" textAlignment="CENTER" textFill="#ffffff91" translateY="-10.0">
         <font>
-            <Font name="System Italic" size="18.0" />
+            <Font name="PT Sans" size="18.0" />
         </font>
     </Label>
-    <Button onAction="#registerPageHandler" mnemonicParsing="false" text="Create an account">
+    <Button mnemonicParsing="false" onAction="#registerPageHandler" style="-fx-background-color: #6A5ACD;" text="Create an account" textFill="#fff4f4" translateY="-10.0">
         <font>
-            <Font size="14.0" />
+            <Font name="PT Mono Bold" size="14.0" />
         </font>
     </Button>
 </VBox>

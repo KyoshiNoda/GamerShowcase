@@ -34,7 +34,7 @@
             </children>
         </AnchorPane>
     </top>
-   <center>
+    <center>
         <AnchorPane maxHeight="283.0" maxWidth="336.0" prefHeight="283.0" prefWidth="336.0" style="-fx-background-color: #708090;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -48,9 +48,9 @@
                     </font>
                 </Label>
                 <Button id="unfriendButton1" layoutX="268.0" layoutY="23.0" mnemonicParsing="false" style="-fx-background-color: #A9A9A9;" text="Unfriend" AnchorPane.bottomAnchor="229.0" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="28.5" AnchorPane.topAnchor="23.0">
-               <font>
-                  <Font name="PT Mono Bold" size="13.0" />
-               </font></Button>
+                    <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                    </font></Button>
                 <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="14.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@FriendsImages/PrincessPeach.jpg" />
@@ -82,18 +82,18 @@
                     </font>
                 </Label>
                 <Button id="unfriendButton2" layoutX="268.0" layoutY="81.0" mnemonicParsing="false" style="-fx-background-color: #A9A9A9;" text="Unfriend" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="28.5">
-               <font>
-                  <Font name="PT Mono Bold" size="13.0" />
-               </font></Button>
+                    <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                    </font></Button>
                 <Button id="unfriendButton3" layoutX="268.0" layoutY="156.0" mnemonicParsing="false" style="-fx-background-color: #A9A9A9;" text="Unfriend" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="28.5">
-               <font>
-                  <Font name="PT Mono Bold" size="13.0" />
-               </font></Button>
+                    <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                    </font></Button>
                 <Button id="unfriendButton3" layoutX="268.0" layoutY="214.0" mnemonicParsing="false" style="-fx-background-color: #A9A9A9;" text="Unfriend" AnchorPane.leftAnchor="268.0" AnchorPane.rightAnchor="28.5">
-               <font>
-                  <Font name="PT Mono Bold" size="13.0" />
-               </font></Button>
-            <ScrollBar id="scrollBar" layoutX="360.0" orientation="VERTICAL" prefHeight="276.0" prefWidth="4.0" style="-fx-background-color: #A9A9A9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                    </font></Button>
+                <ScrollBar id="scrollBar" layoutX="360.0" orientation="VERTICAL" prefHeight="276.0" prefWidth="4.0" style="-fx-background-color: #A9A9A9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             </children></AnchorPane>
-   </center>
+    </center>
 </BorderPane>
