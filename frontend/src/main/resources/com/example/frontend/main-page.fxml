@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" fx:controller="com.example.frontend.controllers.MainPageController">
+   <GridPane hgap="10" vgap="10">
+      <StackPane fx:id="gameCard1" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      <StackPane fx:id="gameCard2" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+      <StackPane fx:id="gameCard3" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+      <StackPane fx:id="gameCard4" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+      <StackPane fx:id="gameCard5" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+      <StackPane fx:id="gameCard6" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+      <StackPane fx:id="gameCard7" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+      <StackPane fx:id="gameCard8" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+      <StackPane fx:id="gameCard9" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+   </GridPane>
+
+   <HBox alignment="CENTER">
+      <Button text="Previous" onAction="#handlePrevButton"/>
+      <Button text="Next" onAction="#handleNextButton"/>
+      <Button text= "Setting" onAction = "#userSettingPage"/>
+      <Button text= "favGames" onAction = "#userFavGamesPage"/>
+   </HBox>
+</VBox>

@@ -1,28 +1,96 @@
 package com.example.frontend.controllers;
+
+import com.example.frontend.App;
+import com.example.frontend.Game;
+import com.example.frontend.User;
+import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class LoginPageController {
-    @FXML private Label titleLabel;
-    @FXML private Label usernameLabel;
-    @FXML private Label passwordLabel;
-    @FXML private TextField usernameField;
+    @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
-    @FXML private Button loginButton;
 
     @FXML
-    public void initialize() {
-        titleLabel.setText("Gamer Showcase");
-        loginButton.setOnAction(event -> handleLoginButtonAction());
-    }
-
-    private void handleLoginButtonAction() {
-        String username = usernameField.getText();
+    private void loginButtonHandler(ActionEvent actionEvent) {
+        String email = emailField.getText();
         String password = passwordField.getText();
-        System.out.println("UserName: " + username);
-        System.out.println("Password: " + password);
+
+        try {
+            var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
+            if (!querySnapshot.isEmpty()) {
+                DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
+                String storedHashedPassword = userSnapshot.getString("password");
+
+                if (BCrypt.checkpw(password, storedHashedPassword)) {
+                    User currentUser = new User(
+                            userSnapshot.getId(),
+                            userSnapshot.getString("firstName"),
+                            userSnapshot.getString("lastName"),
+                            userSnapshot.getString("email"),
+                            userSnapshot.getString("password"),
+                            parseFavGames(userSnapshot.get("favGames"))
+                    );
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
+                    Parent root = loader.load();
+                    MainPageController mainPageController = loader.getController();
+                    mainPageController.setUserData(currentUser);
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) emailField.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    showAlert("Invalid password");
+                }
+            } else {
+                showAlert("Incorrect Information!");
+            }
+        } catch (InterruptedException | ExecutionException | IOException e) {
+            showAlert("Error during login: " + e.getMessage());
+        }
+    }
+    private ArrayList<Game> parseFavGames(Object favGamesObject) {
+        ArrayList<Game> favGames = new ArrayList<>();
+
+        if (favGamesObject instanceof ArrayList) {
+            for (Object gameObj : (ArrayList<?>) favGamesObject) {
+                if (gameObj instanceof Map) {
+                    Map<String, Object> gameMap = (Map<String, Object>) gameObj;
+                    Game game = new Game(
+                            (String) gameMap.get("name"),
+                            (ArrayList<String>) gameMap.get("platforms"),
+                            (String) gameMap.get("released"),
+                            String.valueOf(gameMap.get("rating")),
+                            ((Long) gameMap.get("id")).intValue(),
+                            (String) gameMap.get("esrb"),
+                            (String) gameMap.get("background_image")
+                    );
+
+                    favGames.add(game);
+                }
+            }
+        }
+
+        return favGames;
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Authentication Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

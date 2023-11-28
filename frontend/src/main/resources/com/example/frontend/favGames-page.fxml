@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.FavGamesPageController">
+    <HBox alignment="CENTER_LEFT">
+        <ListView fx:id="gamesListView" HBox.hgrow="ALWAYS" />
+    </HBox>
+    <Button text="Go Back" onAction="#goToMainPage" />
+</VBox>

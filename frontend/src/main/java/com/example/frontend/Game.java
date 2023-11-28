@@ -1,8 +1,10 @@
 package com.example.frontend;
 
+import java.util.ArrayList;
+
 public class Game {
     private String name;
-    private String platforms;
+    private ArrayList<String> platforms;
     private String released;
     private String rating;
     private int id;
@@ -10,7 +12,7 @@ public class Game {
     private String background_image;
 
 
-    public Game(String name, String platforms, String released, String rating, int id, String esrb, String background_image) {
+    public Game(String name, ArrayList<String> platforms, String released, String rating, int id, String esrb, String background_image) {
         this.name = name;
         this.platforms = platforms;
         this.released = released;
@@ -29,11 +31,15 @@ public class Game {
         this.esrb = null;
         this.background_image = null;
     }
+
+    public Game(String name, ArrayList<String> platforms, String released, double rating, int id, String esrb, String backgroundImage) {
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getPlatforms() {
+    public ArrayList<String> getPlatforms() {
         return platforms;
     }
 
@@ -61,7 +67,7 @@ public class Game {
         this.name = name;
     }
 
-    public void setPlatforms(String platforms) {
+    public void setPlatforms(ArrayList<String> platforms) {
         this.platforms = platforms;
     }
 
@@ -85,5 +91,17 @@ public class Game {
         this.background_image = background_image;
     }
 
+    public void print() {
+        System.out.println("Game ID: " + id);
+        System.out.println("Game Name: " + name);
+        System.out.println("Game Image: " + background_image);
+        System.out.println("Game ESRB: " +  esrb);
+        System.out.println("Game Rating: " +  rating);
+        System.out.println("Game Released: " +  released);
+        System.out.println("Game Platforms:");
+        for (String platform : platforms) {
+            System.out.println("\t" + platform);
+        }
+    }
 
 }

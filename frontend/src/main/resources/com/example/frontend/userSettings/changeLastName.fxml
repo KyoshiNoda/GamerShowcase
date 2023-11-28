@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.user_setting.ChangeLastNameController">
+    <children>
+        <Label layoutX="18.0" layoutY="89.0" text="Current Last Name:">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Label>
+        <Label layoutX="18.0" layoutY="184.0" text="New Last Name:">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Label>
+        <Label fx:id="currentLastName" layoutX="245.0" layoutY="89.0" prefHeight="31.0" prefWidth="212.0">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Label>
+        <TextField fx:id="newLastName" layoutX="215.0" layoutY="175.0">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </TextField>
+        <Button fx:id="" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveLastNameHandler" text="Save">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Button>
+        <Button fx:id="backButton" layoutX="503.0" layoutY="336.0" mnemonicParsing="false" onAction="#BackHandler" text="Back">
+            <font>
+                <Font name="Times New Roman" size="28.0" />
+            </font>
+        </Button>
+    </children>
+
+</AnchorPane>
