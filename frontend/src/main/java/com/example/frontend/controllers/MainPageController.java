@@ -43,6 +43,9 @@ public class MainPageController {
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
+
+    static Game clickedGame;
+
     @FXML private void initialize() { updateGameCards(); }
     @FXML
     void setUserData(User user) {
@@ -122,13 +125,26 @@ public class MainPageController {
 
     private void setGameCardClickHandler(StackPane cardPane, Game game) {
         cardPane.setOnMouseClicked(event -> {
-            handleGameCardClick(game);
+            try {
+                handleGameCardClick(game);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
     // This will change view to detailedGameView
-    private void handleGameCardClick(Game game) {
+    private void handleGameCardClick(Game game) throws IOException {
         System.out.println("Clicked game ID: " + game.getId());
+        clickedGame = game;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
+        Parent root = loader.load();
+        SettingPageController settingPageController = loader.getController();
+        settingPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private StackPane getCardPaneByIndex(int index) {
