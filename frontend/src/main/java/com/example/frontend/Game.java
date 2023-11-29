@@ -10,6 +10,7 @@ public class Game {
     private int id;
     private String esrb;
     private String background_image;
+    private String description;
 
 
     public Game(String name, ArrayList<String> platforms, String released, String rating, int id, String esrb, String background_image) {
@@ -20,6 +21,7 @@ public class Game {
         this.id = id;
         this.esrb = esrb;
         this.background_image = background_image;
+        this.description = null;
     }
 
     public Game() {
@@ -30,6 +32,7 @@ public class Game {
         this.id = 0;
         this.esrb = null;
         this.background_image = null;
+        this.description = null;
     }
 
     public Game(String name, ArrayList<String> platforms, String released, double rating, int id, String esrb, String backgroundImage) {
@@ -89,6 +92,14 @@ public class Game {
 
     public void setBackground_image(String background_image) {
         this.background_image = background_image;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void print() {

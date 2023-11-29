@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
+import static com.example.frontend.RawgAPIConfig.getGameDescription;
 
 public class MainPageController {
 
@@ -121,13 +122,18 @@ public class MainPageController {
 
     private void setGameCardClickHandler(StackPane cardPane, Game game) {
         cardPane.setOnMouseClicked(event -> {
-            handleGameCardClick(game);
+            try {
+                handleGameCardClick(game);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
     // This will change view to detailedGameView
-    private void handleGameCardClick(Game game) {
-        System.out.println("Clicked game ID: " + game.getId());
+
+    private void handleGameCardClick(Game game) throws Exception {
+        System.out.println(getGameDescription(game));
     }
 
     private StackPane getCardPaneByIndex(int index) {
