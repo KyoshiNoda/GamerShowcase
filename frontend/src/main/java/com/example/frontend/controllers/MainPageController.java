@@ -8,10 +8,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,14 +16,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
+import static com.example.frontend.RawgAPIConfig.getGameDescription;
 
 public class MainPageController {
 
@@ -43,13 +38,15 @@ public class MainPageController {
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
-
-    static Game clickedGame;
-
     @FXML private void initialize() { updateGameCards(); }
     @FXML
     void setUserData(User user) {
         this.currentUser = user;
+        System.out.println("ID: " + currentUser.getId());
+        System.out.println("Favorite Games:");
+        for (Game currentGame : currentUser.getFavGames()) {
+            currentGame.print();
+        }
     }
 
     private void initGameCard(StackPane cardPane, Game game) {
@@ -127,24 +124,16 @@ public class MainPageController {
         cardPane.setOnMouseClicked(event -> {
             try {
                 handleGameCardClick(game);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
     // This will change view to detailedGameView
-    private void handleGameCardClick(Game game) throws IOException {
-        System.out.println("Clicked game ID: " + game.getId());
-        clickedGame = game;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
-        Parent root = loader.load();
-        SettingPageController settingPageController = loader.getController();
-        settingPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) gameCard1.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+
+    private void handleGameCardClick(Game game) throws Exception {
+        System.out.println(getGameDescription(game));
     }
 
     private StackPane getCardPaneByIndex(int index) {
@@ -204,30 +193,6 @@ public class MainPageController {
             currentPage--;
             updateGameCards();
         }
-    }
-
-    @FXML
-    void userSettingPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
-        Parent root = loader.load();
-        SettingPageController settingPageController = loader.getController();
-        settingPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) gameCard1.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    void userFavGamesPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/favGames-page.fxml"));
-        Parent root = loader.load();
-        FavGamesPageController favGamesPageController = loader.getController();
-        favGamesPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) gameCard1.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
     }
 
     private void showAlert(String message, Alert.AlertType alertType) {
