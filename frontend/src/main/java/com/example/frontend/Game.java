@@ -1,5 +1,6 @@
 package com.example.frontend;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class Game {
@@ -11,9 +12,10 @@ public class Game {
     private String esrb;
     private String background_image;
     private String description;
+    private ArrayList<String> screenshots;
 
 
-    public Game(String name, ArrayList<String> platforms, String released, String rating, int id, String esrb, String background_image) {
+    public Game(String name, ArrayList<String> platforms, String released, String rating, int id, String esrb, String background_image, ArrayList<String> screenshots) {
         this.name = name;
         this.platforms = platforms;
         this.released = released;
@@ -22,6 +24,7 @@ public class Game {
         this.esrb = esrb;
         this.background_image = background_image;
         this.description = null;
+        this.screenshots = new ArrayList<>();
     }
 
     public Game() {
@@ -33,11 +36,8 @@ public class Game {
         this.esrb = null;
         this.background_image = null;
         this.description = null;
+        this.screenshots = null;
     }
-
-    public Game(String name, ArrayList<String> platforms, String released, double rating, int id, String esrb, String backgroundImage) {
-    }
-
     public String getName() {
         return name;
     }
@@ -100,6 +100,14 @@ public class Game {
 
     public String getDescription() {
         return description;
+    }
+
+    public ArrayList<String> getScreenshots() {
+        return screenshots;
+    }
+
+    public void setScreenshots(ArrayList<String> screenshots) {
+        this.screenshots = screenshots;
     }
 
     public void print() {

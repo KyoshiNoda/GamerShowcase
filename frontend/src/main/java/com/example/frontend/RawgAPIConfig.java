@@ -84,15 +84,15 @@ public class RawgAPIConfig {
                         }
                         game.setPlatforms(platformNames);
                     }
-                    if(resultObject.has("released")){
+                    if (resultObject.has("released")) {
                         String released = resultObject.get("released").getAsString();
                         game.setReleased(released);
                     }
-                    if(resultObject.has("rating")){
+                    if (resultObject.has("rating")) {
                         String rating = resultObject.get("rating").getAsString();
                         game.setRating(rating);
                     }
-                    if(resultObject.has("id")){
+                    if (resultObject.has("id")) {
                         int id = resultObject.get("id").getAsInt();
                         game.setId(id);
                     }
@@ -146,7 +146,7 @@ public class RawgAPIConfig {
 
             jsonObject.has("description_raw");
 
-            if(jsonObject.has("description_raw")){
+            if (jsonObject.has("description_raw")) {
                 String description = jsonObject.get("description_raw").getAsString();
                 game.setDescription(description);
             }
@@ -157,6 +157,52 @@ public class RawgAPIConfig {
             return null;
         }
     }
+
+    public ArrayList<String> getGameScreenshots(Game game) throws Exception {
+        String apiKey = System.getenv("RAWG_API_KEY");
+        Game gameDetails = new Game();
+
+        if (apiKey == null) {
+            throw new Exception("API key not found in environment variables");
+        }
+
+        String apiUrl = "https://api.rawg.io/api/games/screenshots" + game.getId() + "?key=" + apiKey;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(apiUrl))
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (response != null && response.statusCode() == 200) {
+            String responseBody = response.body();
+            JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
+
+            if (jsonObject.has("results")) {
+                JsonArray resultsArray = jsonObject.getAsJsonArray("results");
+                ArrayList<String> screenshots = new ArrayList<>();
+                for (int i = 0; i < resultsArray.size(); i++) {
+                    JsonObject resultObject = resultsArray.get(i).getAsJsonObject();
+                    if (resultObject.has("image")) {
+                        String image = resultObject.get("image").getAsString();
+                        screenshots.add(image);
+                    }
+                }
+                game.setScreenshots(screenshots);
+            }
+            return game.getScreenshots();
+        } else {
+            System.out.println("Failed to get game screenshots.");
+            return null;
+        }
+    }
+
 
     public ArrayList<Game> getGamesWithGenre(int page, String genre) throws Exception {
         String apiKey = System.getenv("RAWG_API_KEY");
