@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
-import static com.example.frontend.controllers.MainPageController.clickedGame;
+//import static com.example.frontend.controllers.MainPageController.clickedGame;
 
 public class GameDetailsPageController {
 
@@ -44,9 +44,9 @@ public class GameDetailsPageController {
     @FXML
     private Button BackButton;
     @FXML
-    private void initialize() {
+    /*private void initialize() {
         LoadGameDetails(clickedGame);
-    }
+    }*/
 
     private void LoadGameDetails(Game game) {
         String imageUrl = game.getBackground_image();
