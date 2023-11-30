@@ -27,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
-import static com.example.frontend.RawgAPIConfig.getGameDescription;
 
 public class MainPageController {
 

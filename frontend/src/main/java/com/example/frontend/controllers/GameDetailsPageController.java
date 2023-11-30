@@ -3,10 +3,10 @@ package com.example.frontend.controllers;
 import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
-//import com.google.api.core.ApiFuture;
-//import com.google.cloud.firestore.DocumentReference;
-//import com.google.cloud.firestore.SetOptions;
-//import com.google.cloud.firestore.WriteResult;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.SetOptions;
+import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -35,8 +35,6 @@ public class GameDetailsPageController {
     private TextArea DescriptionTextArea;
     @FXML
     private TextField ReleaseTextField;
-    @FXML
-    private TextField PlayTimeTextField;
     @FXML
     private ImageView GameImageView;
     @FXML
