@@ -25,14 +25,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
-//import static com.example.frontend.controllers.MainPageController.clickedGame;
+import static com.example.frontend.controllers.MainPageController.clickedGame;
 
 public class GameDetailsPageController {
 
     @FXML
     private TextField RatingTextField;
-    //@FXML
-    //private TextArea DescriptionTextArea;
+    @FXML
+    private TextArea DescriptionTextArea;
     @FXML
     private TextField ReleaseTextField;
     @FXML
@@ -44,9 +44,9 @@ public class GameDetailsPageController {
     @FXML
     private Button BackButton;
     @FXML
-    /*private void initialize() {
-        LoadGameDetails(clickedGame);
-    }*/
+    private User currentUser;
+    @FXML
+    private void initialize() { LoadGameDetails(clickedGame);}
 
     private void LoadGameDetails(Game game) {
         String imageUrl = game.getBackground_image();
@@ -60,10 +60,14 @@ public class GameDetailsPageController {
             }
         }
         RatingTextField.setText(game.getRating());
-        //DescriptionTextArea.setText(game.);
+        DescriptionTextArea.setText(game.getDescription());
         ReleaseTextField.setText(game.getReleased());
         ESRBTextField.setText(game.getEsrb());
 
+    }
+
+    public void setUserData(User user) {
+        this.currentUser = user;
     }
 
 

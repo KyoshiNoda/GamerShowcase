@@ -44,6 +44,8 @@ public class MainPageController {
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
+
+    static Game clickedGame;
     @FXML private void initialize() { updateGameCards(); }
     @FXML
     void setUserData(User user) {
@@ -139,7 +141,16 @@ public class MainPageController {
     // This will change view to detailedGameView
 
     private void handleGameCardClick(Game game) throws Exception {
-        System.out.println(getGameDescription(game));
+        clickedGame = game;
+        App.setRoot("game-details-page");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
+        Parent root = loader.load();
+        GameDetailsPageController gameDetailspageController = loader.getController();
+        //GameDetailsPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private StackPane getCardPaneByIndex(int index) {
