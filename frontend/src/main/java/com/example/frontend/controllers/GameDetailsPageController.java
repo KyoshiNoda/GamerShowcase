@@ -64,8 +64,8 @@ public class GameDetailsPageController {
 
     }
 
-    public void setUserData(User user) {
-        this.currentUser = user;
+    public void setUserData(User currentUser) {
+        this.currentUser = currentUser;
     }
 
 

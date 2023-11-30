@@ -141,11 +141,11 @@ public class MainPageController {
 
     private void handleGameCardClick(Game game) throws Exception {
         clickedGame = game;
-        App.setRoot("game-details-page");
+        //App.setRoot("game-details-page");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
         Parent root = loader.load();
         GameDetailsPageController gameDetailspageController = loader.getController();
-        //GameDetailsPageController.setUserData(currentUser);
+        gameDetailspageController.setUserData(currentUser);
         Scene scene = new Scene(root);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
