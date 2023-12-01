@@ -40,7 +40,7 @@ public class RegisterPageController {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
-            String requestBody = "email=" + email + "&otherEmail=" + "schedulefinder@gmail.com";
+            String requestBody = "email=" + email + "&otherEmail=" + "gamershowcase.noreply@gmail.com";
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = requestBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
