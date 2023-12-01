@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.GameDetailsPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.GameDetailsPageController">
    <children>
       <Label layoutX="214.0" layoutY="89.0" text="Rating:">
          <font>
@@ -36,4 +36,4 @@
       <TextField fx:id="ESRBTextField" editable="false" layoutX="528.0" layoutY="348.0" prefHeight="25.0" prefWidth="64.0" />
       <ImageView fx:id="GameImageView" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" />
    </children>
-</fx:root>
+</AnchorPane>
