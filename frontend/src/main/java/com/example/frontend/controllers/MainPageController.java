@@ -138,10 +138,9 @@ public class MainPageController {
     }
 
     // This will change view to detailedGameView
-
-    private void handleGameCardClick(Game game) throws Exception {
+    @FXML
+    private void handleGameCardClick(Game game) throws IOException {
         clickedGame = game;
-        //App.setRoot("game-details-page");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
         Parent root = loader.load();
         GameDetailsPageController gameDetailspageController = loader.getController();

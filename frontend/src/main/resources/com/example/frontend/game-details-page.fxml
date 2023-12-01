@@ -10,20 +10,20 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.GameDetailsPageController">
    <children>
-      <Label layoutX="214.0" layoutY="89.0" text="Rating:">
+      <Label layoutX="214.0" layoutY="134.0" text="Rating:">
          <font>
             <Font name="Times New Roman" size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="RatingTextField" editable="false" layoutX="300.0" layoutY="91.0" prefHeight="25.0" prefWidth="64.0" />
+      <TextField fx:id="RatingTextField" editable="false" layoutX="300.0" layoutY="136.0" prefHeight="25.0" prefWidth="64.0" />
       <Label layoutX="14.0" layoutY="345.0" text="Released:">
          <font>
             <Font name="Times New Roman" size="27.0" />
          </font>
       </Label>
       <TextArea fx:id="DescriptionTextArea" editable="false" layoutX="14.0" layoutY="164.0" prefHeight="150.0" prefWidth="440.0" />
-      <TextField fx:id="ReleaseTextField" editable="false" layoutX="119.0" layoutY="347.0" />
-      <Button fx:id="BackButton" layoutX="482.0" layoutY="55.0" mnemonicParsing="false" onAction="#Return_To_Main_Page" text="Back" textAlignment="CENTER">
+      <TextField fx:id="ReleaseTextField" editable="false" layoutX="119.0" layoutY="347.0" prefHeight="25.0" prefWidth="105.0" />
+      <Button fx:id="BackButton" layoutX="454.0" layoutY="55.0" mnemonicParsing="false" onAction="#Return_To_Main_Page" text="Back" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman" size="27.0" />
          </font>
@@ -35,5 +35,10 @@
       </Label>
       <TextField fx:id="ESRBTextField" editable="false" layoutX="528.0" layoutY="348.0" prefHeight="25.0" prefWidth="64.0" />
       <ImageView fx:id="GameImageView" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" />
+      <Button layoutX="214.0" layoutY="55.0" mnemonicParsing="false" text="Favorite Game">
+         <font>
+            <Font name="Times New Roman" size="27.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

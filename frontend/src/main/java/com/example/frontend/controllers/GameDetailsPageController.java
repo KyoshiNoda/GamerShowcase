@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import static com.example.frontend.RawgAPIConfig.getGameDescription;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.MainPageController.clickedGame;
 
@@ -44,9 +46,9 @@ public class GameDetailsPageController {
     @FXML
     private User currentUser;
     @FXML
-    private void initialize() { LoadGameDetails(clickedGame);}
+    private void initialize() throws Exception { LoadGameDetails(clickedGame);}
 
-    private void LoadGameDetails(Game game) {
+    private void LoadGameDetails(Game game) throws Exception {
         String imageUrl = game.getBackground_image();
         if (imageUrl != null && !imageUrl.isEmpty()) {
             try {
@@ -58,7 +60,7 @@ public class GameDetailsPageController {
             }
         }
         RatingTextField.setText(game.getRating());
-        DescriptionTextArea.setText(game.getDescription());
+        DescriptionTextArea.setText(getGameDescription(game));
         ReleaseTextField.setText(game.getReleased());
         ESRBTextField.setText(game.getEsrb());
 
@@ -72,6 +74,7 @@ public class GameDetailsPageController {
 
     @FXML
     protected void Return_To_Main_Page() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
         App.setRoot("main-page");
     }
 
