@@ -49,8 +49,6 @@ public class RegisterPageController {
             try (InputStream inputStream = connection.getInputStream()) {
                 byte[] responseBytes = inputStream.readAllBytes();
                 String response = new String(responseBytes, "utf-8");
-                System.out.println("Response Code: " + responseCode);
-                System.out.println("Response: " + response);
             } catch (Exception e) {
                 System.out.println("Error reading response: " + e.getMessage());
             }
@@ -78,8 +76,6 @@ public class RegisterPageController {
             try (InputStream inputStream = connection.getInputStream()) {
                 byte[] responseBytes = inputStream.readAllBytes();
                 String response = new String(responseBytes, "utf-8");
-                System.out.println("Verification Response Code: " + responseCode);
-                System.out.println("Verification Response: " + response);
             } catch (Exception e) {
                 System.out.println("Error reading verification response: " + e.getMessage());
             }
@@ -186,10 +182,7 @@ public class RegisterPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
         Parent root = loader.load();
         MainPageController mainPageController = loader.getController();
-
-        // Pass the current user to the MainPageController
         mainPageController.setUserData(currentUser);
-
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
