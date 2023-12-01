@@ -50,20 +50,11 @@ public class GameDetailsPageController {
 
     private void LoadGameDetails(Game game) throws Exception {
         String imageUrl = game.getBackground_image();
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            try {
-                GameImageView = new ImageView(new Image(imageUrl));
-                GameImageView.setFitWidth(200);
-                GameImageView.setFitHeight(150);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        GameImageView.setImage(new Image(imageUrl));
         RatingTextField.setText(game.getRating());
         DescriptionTextArea.setText(getGameDescription(game));
         ReleaseTextField.setText(game.getReleased());
         ESRBTextField.setText(game.getEsrb());
-
     }
 
     public void setUserData(User currentUser) {
