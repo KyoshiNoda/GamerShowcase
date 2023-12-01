@@ -5,6 +5,7 @@ import com.example.frontend.Game;
 import com.example.frontend.User;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
+import static com.example.frontend.controllers.LoginPageController.parseFavGames;
 
 public class MainPageController {
 
@@ -232,6 +234,38 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    void externalUserPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/externalUser-page.fxml"));
+        Parent root = loader.load();
+        ExternalUserPageController externalUserPageController = loader.getController();
+        externalUserPageController.setUserData(currentUser,getOtherUser("Matmurrell12@gmail.com"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+    private User getOtherUser(String email) {
+        try {
+            var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
+            if (!querySnapshot.isEmpty()){
+                DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
+                return new User(
+                        userSnapshot.getId(),
+                        userSnapshot.getString("firstName"),
+                        userSnapshot.getString("lastName"),
+                        userSnapshot.getString("email"),
+                        userSnapshot.getString("password"),
+                        parseFavGames(userSnapshot.get("favGames"))
+                );
+            }
+
+        } catch (InterruptedException | ExecutionException e) {
+           System.out.println("cannot find user");
+        }
+        return null;
     }
 
     private void showAlert(String message, Alert.AlertType alertType) {

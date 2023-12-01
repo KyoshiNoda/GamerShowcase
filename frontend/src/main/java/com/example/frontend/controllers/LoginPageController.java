@@ -6,7 +6,9 @@ import com.example.frontend.User;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,8 @@ import java.util.concurrent.ExecutionException;
 public class LoginPageController {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
+    @FXML
+    public void initialize() { new Hyperlink("Create Account").setOnAction(this::registerPageHandler); }
 
     @FXML
     private void loginButtonHandler(ActionEvent actionEvent) {
@@ -62,7 +66,7 @@ public class LoginPageController {
             showAlert("Error during login: " + e.getMessage());
         }
     }
-    private ArrayList<Game> parseFavGames(Object favGamesObject) {
+    static public ArrayList<Game> parseFavGames(Object favGamesObject) {
         ArrayList<Game> favGames = new ArrayList<>();
 
         if (favGamesObject instanceof ArrayList) {
@@ -87,6 +91,18 @@ public class LoginPageController {
 
         return favGames;
     }
+
+    @FXML
+    private void registerPageHandler(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/register-page.fxml"));
+        Parent root;
+        try { root = loader.load(); } catch (IOException e) { throw new RuntimeException(e);}
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Authentication Error");

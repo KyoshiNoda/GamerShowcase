@@ -36,5 +36,6 @@
       <Button onAction="#handleNextButton" text="Next" />
       <Button onAction="#userSettingPage" text="Setting" />
       <Button onAction="#userFavGamesPage" text="favGames" />
+      <Button onAction="#externalUserPage" text="TestUser" />
    </HBox>
 </VBox>
