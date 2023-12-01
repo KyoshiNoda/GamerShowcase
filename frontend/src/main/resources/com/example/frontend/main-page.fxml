@@ -24,5 +24,6 @@
       <Button text="Next" onAction="#handleNextButton"/>
       <Button text= "Setting" onAction = "#userSettingPage"/>
       <Button text= "favGames" onAction = "#userFavGamesPage"/>
+      <Button text = "TestUser" onAction="#externalUserPage"/>
    </HBox>
 </VBox>

@@ -62,7 +62,7 @@ public class LoginPageController {
             showAlert("Error during login: " + e.getMessage());
         }
     }
-    private ArrayList<Game> parseFavGames(Object favGamesObject) {
+    static public ArrayList<Game> parseFavGames(Object favGamesObject) {
         ArrayList<Game> favGames = new ArrayList<>();
 
         if (favGamesObject instanceof ArrayList) {
