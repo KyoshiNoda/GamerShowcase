@@ -3,12 +3,20 @@ package com.example.frontend.controllers;
 import com.example.frontend.App;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.firebase.auth.UserRecord;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
+import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +27,8 @@ public class RegisterPageController {
     @FXML private TextField emailInput;
     @FXML private PasswordField passwordInput;
     @FXML private PasswordField confirmPasswordInput;
+    @FXML
+    public void initialize() { new Hyperlink("Log In").setOnAction(this::loginPageHandler); }
 
     @FXML
     private void submitHandler(ActionEvent event) {
@@ -64,6 +74,18 @@ public class RegisterPageController {
             return null;
         }
     }
+
+    @FXML
+    private void loginPageHandler(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/login-page.fxml"));
+        Parent root;
+        try { root = loader.load(); } catch (IOException e) { throw new RuntimeException(e);}
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
