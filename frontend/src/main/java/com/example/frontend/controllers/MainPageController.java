@@ -45,10 +45,17 @@ public class MainPageController {
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
+
+    static Game clickedGame;
     @FXML private void initialize() { updateGameCards(); }
     @FXML
     void setUserData(User user) {
         this.currentUser = user;
+        System.out.println("ID: " + currentUser.getId());
+        System.out.println("Favorite Games:");
+        for (Game currentGame : currentUser.getFavGames()) {
+            currentGame.print();
+        }
     }
 
     private void initGameCard(StackPane cardPane, Game game) {
@@ -124,13 +131,26 @@ public class MainPageController {
 
     private void setGameCardClickHandler(StackPane cardPane, Game game) {
         cardPane.setOnMouseClicked(event -> {
-            handleGameCardClick(game);
+            try {
+                handleGameCardClick(game);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
     // This will change view to detailedGameView
-    private void handleGameCardClick(Game game) {
-        System.out.println("Clicked game ID: " + game.getId());
+    @FXML
+    private void handleGameCardClick(Game game) throws IOException {
+        clickedGame = game;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
+        Parent root = loader.load();
+        GameDetailsPageController gameDetailspageController = loader.getController();
+        gameDetailspageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private StackPane getCardPaneByIndex(int index) {

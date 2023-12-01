@@ -80,7 +80,8 @@ public class LoginPageController {
                             String.valueOf(gameMap.get("rating")),
                             ((Long) gameMap.get("id")).intValue(),
                             (String) gameMap.get("esrb"),
-                            (String) gameMap.get("background_image")
+                            (String) gameMap.get("background_image"),
+                            (ArrayList<String>) gameMap.get("screenshots")
                     );
 
                     favGames.add(game);
