@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.frontend.utils.Utils.showAlert;
+
 public class RegisterPageController {
     @FXML private TextField firstNameInput;
     @FXML private TextField lastNameInput;
@@ -55,7 +57,7 @@ public class RegisterPageController {
             connection.disconnect();
             return responseCode;
         } catch (Exception e) {
-            showAlert("Error sending verification email: " + e.getMessage());
+            showAlert("Error sending verification email: " + e.getMessage(), Alert.AlertType.ERROR);
             return -1;
         }
     }
@@ -96,7 +98,7 @@ public class RegisterPageController {
             String confirmPassword = confirmPasswordInput.getText();
 
             if (!password.equals(confirmPassword)) {
-                showAlert("Password and Confirm Password do not match");
+                showAlert("Password and Confirm Password do not match", Alert.AlertType.ERROR);
                 return;
             }
 
@@ -128,19 +130,19 @@ public class RegisterPageController {
                             userDocRef.set(userData);
                             goToMainPage();
                         } catch (Exception e) {
-                            showAlert("Error creating user: " + e.getMessage());
+                            showAlert("Error creating user: " + e.getMessage(), Alert.AlertType.ERROR);
                         }
                     }
                     else {
-                        showAlert("Verification code is not valid. Please try again.");
+                        showAlert("Verification code is not valid. Please try again.", Alert.AlertType.ERROR);
                     }
                 }
                 else {
-                    showAlert("Verification code cannot be empty. Please try again.");
+                    showAlert("Verification code cannot be empty. Please try again.", Alert.AlertType.ERROR);
                 }
             }
             else {
-                showAlert("Error sending verification email");
+                showAlert("Error sending verification email", Alert.AlertType.ERROR);
             }
         }
 
@@ -152,7 +154,7 @@ public class RegisterPageController {
             UserRecord userRecord = App.auth.createUser(request);
             return userRecord.getUid();
         } catch (Exception e) {
-            showAlert("Error creating user: " + e.getMessage());
+            showAlert("Error creating user: " + e.getMessage(), Alert.AlertType.ERROR);
             return null;
         }
     }
@@ -188,13 +190,5 @@ public class RegisterPageController {
         stage.setScene(scene);
         stage.show();
         ((Stage) ((Node) emailInput).getScene().getWindow()).close();
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Registration Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

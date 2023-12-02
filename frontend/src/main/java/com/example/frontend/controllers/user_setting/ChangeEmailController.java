@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.frontend.utils.Utils.showAlert;
+
 public class ChangeEmailController {
     @FXML private Label currentEmail;
     @FXML private TextField newEmail;
@@ -70,13 +72,4 @@ public class ChangeEmailController {
             e.printStackTrace();
         }
     }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.mindrot.jbcrypt.BCrypt;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class ChangePasswordController {
     @FXML private PasswordField currentPassword;
@@ -72,11 +73,4 @@ public class ChangePasswordController {
         }
     }
 
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Password Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

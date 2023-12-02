@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.LoginPageController.parseFavGames;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class MainPageController {
 
@@ -266,13 +267,5 @@ public class MainPageController {
            System.out.println("cannot find user");
         }
         return null;
-    }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Favorite Game Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

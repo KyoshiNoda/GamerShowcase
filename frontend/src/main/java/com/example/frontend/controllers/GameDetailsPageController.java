@@ -32,29 +32,20 @@ import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGameDescription;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.MainPageController.clickedGame;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class GameDetailsPageController {
 
-    @FXML
-    private Label RatingLabel;
-    @FXML
-    private TextArea DescriptionTextArea;
-    @FXML
-    private Label ReleaseLabel;
-    @FXML
-    private ImageView GameImageView;
-    @FXML
-    private Label ESRBLabel;
-    @FXML
-    private Label NameLabel;
-    @FXML
-    private Button BackButton;
-    @FXML
-    private Button FavoriteGameButton;
-    @FXML
-    private User currentUser;
-    @FXML
-    private void initialize() throws Exception { LoadGameDetails(clickedGame);}
+    @FXML private Label RatingLabel;
+    @FXML private TextArea DescriptionTextArea;
+    @FXML private Label ReleaseLabel;
+    @FXML private ImageView GameImageView;
+    @FXML private Label ESRBLabel;
+    @FXML private Label NameLabel;
+    @FXML private Button BackButton;
+    @FXML private Button FavoriteGameButton;
+    @FXML private User currentUser;
+    @FXML private void initialize() throws Exception { LoadGameDetails(clickedGame);}
 
     private void LoadGameDetails(Game game) throws Exception {
         String imageUrl = game.getBackground_image();
@@ -93,10 +84,6 @@ public class GameDetailsPageController {
         this.currentUser = currentUser;
     }
 
-
-
-
-
     @FXML
     protected void Return_To_Main_Page() throws IOException {
         loadScene("/com/example/frontend/main-page.fxml");
@@ -115,14 +102,5 @@ public class GameDetailsPageController {
         }
 
     }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Favorite Game Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 
 }

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class ChangeFirstNameController {
     @FXML private Label currentFirstName;
@@ -70,13 +71,4 @@ public class ChangeFirstNameController {
             e.printStackTrace();
         }
     }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 }

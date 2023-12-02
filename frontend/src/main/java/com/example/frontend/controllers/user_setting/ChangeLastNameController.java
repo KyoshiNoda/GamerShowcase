@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.frontend.utils.Utils.showAlert;
+
 public class ChangeLastNameController {
     @FXML private Label currentLastName;
     @FXML private TextField newLastName;
@@ -69,13 +71,5 @@ public class ChangeLastNameController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
