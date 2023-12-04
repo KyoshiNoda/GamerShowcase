@@ -24,7 +24,7 @@ public class ChangeLastNameController {
     @FXML private Label currentLastName;
     @FXML private TextField newLastName;
     @FXML private Button backButton;
-    User currentUser;
+    private User currentUser;
 
     @FXML
     public void setUserData(User currentUser) {
@@ -58,7 +58,7 @@ public class ChangeLastNameController {
     }
 
     @FXML
-    public void BackHandler() {
+    public void backHandler() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
             Parent root = loader.load();

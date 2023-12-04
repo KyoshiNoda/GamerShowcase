@@ -1,7 +1,7 @@
 package com.example.frontend.controllers.user_setting;
 
 import com.example.frontend.User;
-import com.example.frontend.controllers.SettingPageController;
+import com.example.frontend.controllers.MainPageController;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class ChangeEmailController {
     @FXML private Label currentEmail;
     @FXML private TextField newEmail;
     @FXML private Button backButton;
-    User currentUser;
+    private User currentUser;
 
     @FXML
     public void setUserData(User currentUser) {
@@ -58,14 +58,14 @@ public class ChangeEmailController {
     }
 
     @FXML
-    public void BackHandler() {
+    public void backHandler() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
             Parent root = loader.load();
-            SettingPageController settingPageController = loader.getController();
-            settingPageController.returnFromPage(currentUser);
+            MainPageController mainPageController = loader.getController();
+            mainPageController.setUserData(currentUser);
             Scene scene = new Scene(root);
-            Stage stage = (Stage) backButton.getScene().getWindow();
+            Stage stage = (Stage) currentEmail.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

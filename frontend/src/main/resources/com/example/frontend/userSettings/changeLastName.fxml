@@ -26,12 +26,12 @@
                 <Font name="Times New Roman" size="28.0" />
             </font>
         </TextField>
-        <Button fx:id="" layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveLastNameHandler" text="Save">
+        <Button layoutX="259.0" layoutY="263.0" mnemonicParsing="false" onAction="#saveLastNameHandler" text="Save">
             <font>
                 <Font name="Times New Roman" size="28.0" />
             </font>
         </Button>
-        <Button fx:id="backButton" layoutX="503.0" layoutY="336.0" mnemonicParsing="false" onAction="#BackHandler" text="Back">
+        <Button fx:id="backButton" layoutX="503.0" layoutY="336.0" mnemonicParsing="false" onAction="#backHandler" text="Back">
             <font>
                 <Font name="Times New Roman" size="28.0" />
             </font>

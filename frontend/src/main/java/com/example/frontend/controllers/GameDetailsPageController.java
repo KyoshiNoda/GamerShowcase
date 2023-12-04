@@ -30,8 +30,6 @@ public class GameDetailsPageController {
     @FXML private ImageView GameImageView;
     @FXML private Label ESRBLabel;
     @FXML private Label NameLabel;
-    @FXML private Button BackButton;
-    @FXML private Button FavoriteGameButton;
     @FXML private User currentUser;
     @FXML private void initialize() throws Exception { LoadGameDetails(clickedGame);}
 
@@ -88,7 +86,5 @@ public class GameDetailsPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
