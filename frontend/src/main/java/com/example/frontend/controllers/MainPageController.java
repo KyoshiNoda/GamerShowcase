@@ -140,7 +140,6 @@ public class MainPageController {
         });
     }
 
-    // This will change view to detailedGameView
     @FXML
     private void handleGameCardClick(Game game) throws IOException {
         clickedGame = game;

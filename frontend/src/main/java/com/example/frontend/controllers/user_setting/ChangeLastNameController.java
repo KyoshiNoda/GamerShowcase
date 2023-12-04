@@ -58,7 +58,7 @@ public class ChangeLastNameController {
     }
 
     @FXML
-    public void BackHandler() throws IOException {
+    public void BackHandler() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
             Parent root = loader.load();

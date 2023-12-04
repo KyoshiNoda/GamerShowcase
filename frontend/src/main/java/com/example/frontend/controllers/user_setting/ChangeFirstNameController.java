@@ -32,7 +32,7 @@ public class ChangeFirstNameController {
     }
 
     @FXML
-    public void saveFirstNameHandler() throws IOException {
+    public void saveFirstNameHandler() {
         String updatedFirstName = newFirstName.getText();
 
         if (!updatedFirstName.isEmpty()) {
@@ -57,7 +57,7 @@ public class ChangeFirstNameController {
     }
 
     @FXML
-    public void BackHandler() throws IOException {
+    public void BackHandler() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
             Parent root = loader.load();

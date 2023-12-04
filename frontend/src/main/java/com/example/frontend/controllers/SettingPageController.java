@@ -30,8 +30,6 @@ public class SettingPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load(), 600, 400);
-
-            // Pass the current user to the loaded controller
             if (loader.getController() instanceof MainPageController) {
                 MainPageController mainPageController = loader.getController();
                 mainPageController.setUserData(currentUser);

@@ -33,7 +33,7 @@ public class ChangeEmailController {
     }
 
     @FXML
-    public void saveEmailHandler() throws IOException {
+    public void saveEmailHandler() {
         String updatedEmail = newEmail.getText();
 
         if (!updatedEmail.isEmpty()) {
@@ -58,7 +58,7 @@ public class ChangeEmailController {
     }
 
     @FXML
-    public void BackHandler() throws IOException {
+    public void BackHandler() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
             Parent root = loader.load();

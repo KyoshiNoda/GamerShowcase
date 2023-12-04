@@ -31,7 +31,7 @@ public class ChangePasswordController {
     }
 
     @FXML
-    public void savePasswordHandler() throws IOException {
+    public void savePasswordHandler() {
         String enteredCurrentPassword = currentPassword.getText();
         String enteredNewPassword = newPassword.getText();
         String enteredConfirmPassword = confirmNewPassword.getText();
@@ -58,7 +58,7 @@ public class ChangePasswordController {
     }
 
     @FXML
-    public void BackHandler() throws IOException {
+    public void BackHandler() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
             Parent root = loader.load();

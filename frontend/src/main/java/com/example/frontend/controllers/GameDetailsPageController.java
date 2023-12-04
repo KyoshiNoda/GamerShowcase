@@ -3,34 +3,22 @@ package com.example.frontend.controllers;
 import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
-import com.example.frontend.controllers.user_setting.ChangeEmailController;
-import com.example.frontend.controllers.user_setting.ChangeFirstNameController;
-import com.example.frontend.controllers.user_setting.ChangeLastNameController;
-import com.example.frontend.controllers.user_setting.ChangePasswordController;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
 import static com.example.frontend.RawgAPIConfig.getGameDescription;
-import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.MainPageController.clickedGame;
 import static com.example.frontend.utils.Utils.showAlert;
 

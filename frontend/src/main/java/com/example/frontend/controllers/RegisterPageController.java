@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,7 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static com.example.frontend.utils.Utils.showAlert;
 
 public class RegisterPageController {
