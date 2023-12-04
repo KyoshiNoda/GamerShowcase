@@ -1,23 +1,17 @@
 package com.example.frontend.controllers.user_setting;
 
 import com.example.frontend.User;
-import com.example.frontend.controllers.MainPageController;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import com.example.frontend.App;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+import static com.example.frontend.utils.Utils.backToSettingHandler;
 import static com.example.frontend.utils.Utils.showAlert;
 
 public class ChangeEmailController {
@@ -57,19 +51,5 @@ public class ChangeEmailController {
         }
     }
 
-    @FXML
-    public void backHandler() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
-            Parent root = loader.load();
-            MainPageController mainPageController = loader.getController();
-            mainPageController.setUserData(currentUser);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) currentEmail.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    @FXML public void backHandler() { backToSettingHandler(currentUser,backButton); }
 }
