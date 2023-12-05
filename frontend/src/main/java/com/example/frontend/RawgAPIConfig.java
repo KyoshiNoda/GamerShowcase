@@ -158,6 +158,89 @@ public class RawgAPIConfig {
         }
     }
 
+    public static Game getGameDetails(String slug) throws Exception {
+        String apiKey = System.getenv("RAWG_API_KEY");
+        Game game = new Game();
+
+        if (apiKey == null) {
+            throw new Exception("API key not found in environment variables");
+        }
+
+        String apiUrl = "https://api.rawg.io/api/games/" + slug + "?key=" + apiKey;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(apiUrl))
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (response != null && response.statusCode() == 200) {
+            String responseBody = response.body();
+            JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
+
+            if (jsonObject.has("id")) {
+                int id = jsonObject.get("id").getAsInt();
+                game.setId(id);
+            }
+            if (jsonObject.has("name")) {
+                String name = jsonObject.get("name").getAsString();
+                game.setName(name);
+            }
+            if (jsonObject.has("platforms")) {
+                JsonArray platformsArray = jsonObject.getAsJsonArray("platforms");
+                ArrayList<String> platformNames = new ArrayList<>();
+                for (int j = 0; j < platformsArray.size(); j++) {
+                    JsonObject platformObject = platformsArray.get(j).getAsJsonObject();
+                    if (platformObject.has("platform")) {
+                        JsonObject platform = platformObject.getAsJsonObject("platform");
+                        if (platform.has("name")) {
+                            String platformName = platform.get("name").getAsString();
+                            platformNames.add(platformName);
+                        }
+                    }
+                }
+                game.setPlatforms(platformNames);
+            }
+            if(jsonObject.has("released")){
+                String released = jsonObject.get("released").getAsString();
+                game.setReleased(released);
+            }
+            if(jsonObject.has("rating")){
+                String rating = jsonObject.get("rating").getAsString();
+                game.setRating(rating);
+            }
+
+            if (jsonObject.has("description_raw")) {
+                String description = jsonObject.get("description_raw").getAsString();
+                game.setDescription(description);
+            }
+
+            if (jsonObject.has("esrb_rating") && !jsonObject.get("esrb_rating").isJsonNull()) {
+                JsonObject esrbObject = jsonObject.getAsJsonObject("esrb_rating");
+
+                if (esrbObject.has("name")) {
+                    String esrb = esrbObject.get("name").getAsString();
+                    game.setEsrb(esrb);
+                }
+            }
+            if (jsonObject.has("background_image") && !jsonObject.get("background_image").isJsonNull()) {
+                String background_image = jsonObject.get("background_image").getAsString();
+                game.setBackground_image(background_image);
+            }
+
+        } else {
+            System.out.println("Failed to get game details.");
+            return null;
+        }
+        return game;
+    }
+
     public ArrayList<String> getGameScreenshots(Game game) throws Exception {
         String apiKey = System.getenv("RAWG_API_KEY");
         Game gameDetails = new Game();
@@ -211,8 +294,6 @@ public class RawgAPIConfig {
         if (apiKey == null) {
             throw new Exception("API key not found in environment variables");
         }
-
-        //String apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&genres=" + genre;
         String apiUrl;
         if (page == 1) {
             apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=9";
@@ -303,8 +384,6 @@ public class RawgAPIConfig {
         if (apiKey == null) {
             throw new Exception("API key not found in environment variables");
         }
-
-        //String apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&platforms=" + platform;
         String apiUrl;
         if (page == 1) {
             apiUrl = "https://api.rawg.io/api/games?key=" + apiKey + "&page_size=9";
