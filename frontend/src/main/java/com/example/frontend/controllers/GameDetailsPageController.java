@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGameDescription;
-import static com.example.frontend.controllers.MainPageController.clickedGame;
+import static com.example.frontend.controllers.MainPageController.selectedGame;
 import static com.example.frontend.utils.Utils.showAlert;
 
 public class GameDetailsPageController {
@@ -31,7 +31,7 @@ public class GameDetailsPageController {
     @FXML private Label ESRBLabel;
     @FXML private Label NameLabel;
     @FXML private User currentUser;
-    @FXML private void initialize() throws Exception { LoadGameDetails(clickedGame);}
+    @FXML private void initialize() throws Exception { LoadGameDetails(selectedGame);}
 
     private void LoadGameDetails(Game game) throws Exception {
         String imageUrl = game.getBackground_image();
@@ -45,7 +45,7 @@ public class GameDetailsPageController {
 
     @FXML
     protected void HandleaddFavoriteGame() {
-        addFavoriteGame(clickedGame);
+        addFavoriteGame(selectedGame);
     }
     @FXML
     protected void addFavoriteGame(Game game) {

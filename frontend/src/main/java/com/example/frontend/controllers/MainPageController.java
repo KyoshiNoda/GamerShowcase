@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import static com.example.frontend.RawgAPIConfig.getGameDetails;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.LoginPageController.parseFavGames;
 import static com.example.frontend.utils.Utils.showAlert;
@@ -50,7 +51,7 @@ public class MainPageController {
     private User currentUser;
     private int currentPage = 1;
 
-    static Game clickedGame;
+    static Game selectedGame;
     @FXML private void initialize() {
         updateGameCards();
         createToggleGroup();
@@ -75,17 +76,24 @@ public class MainPageController {
             if (newValue != null) {
                 ToggleButton selectedToggle = (ToggleButton) newValue;
                 if ("Games".equals(selectedToggle.getText())) {
-                    onGameSearch(searchBar.getText());
+                    try {
+                        onGameSearch(searchBar.getText());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 } else if ("Users".equals(selectedToggle.getText())) {
-                    onUserSearch(searchBar.getText());
+                    try {
+                        onUserSearch(searchBar.getText());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
     }
 
-
     @FXML
-    private void submitSearch() {
+    private void submitSearch() throws Exception {
         String searchQuery = searchBar.getText().trim();
         ToggleButton selectedToggle = (ToggleButton) searchToggleGroup.getSelectedToggle();
 
@@ -98,12 +106,22 @@ public class MainPageController {
         }
     }
 
-    private void onGameSearch(String search) {
-        System.out.println("GAME: " + search);
+    @FXML
+    private void onGameSearch(String slugSearch) throws Exception {
+        selectedGame = getGameDetails(slugSearch);
+        gameDetailPage();
     }
 
-    private void onUserSearch(String search) {
-        System.out.println("USER: " + search);
+    @FXML
+    private void onUserSearch(String userSearch) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/externalUser-page.fxml"));
+        Parent root = loader.load();
+        ExternalUserPageController externalUserPageController = loader.getController();
+        externalUserPageController.setUserData(currentUser,getOtherUser(userSearch));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 
@@ -190,15 +208,8 @@ public class MainPageController {
 
     @FXML
     private void handleGameCardClick(Game game) throws IOException {
-        clickedGame = game;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
-        Parent root = loader.load();
-        GameDetailsPageController gameDetailspageController = loader.getController();
-        gameDetailspageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) gameCard1.getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+        selectedGame = game;
+        gameDetailPage();
     }
 
     private StackPane getCardPaneByIndex(int index) {
@@ -283,18 +294,18 @@ public class MainPageController {
         stage.setScene(scene);
         stage.show();
     }
-
     @FXML
-    void externalUserPage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/externalUser-page.fxml"));
+    void gameDetailPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/game-details-page.fxml"));
         Parent root = loader.load();
-        ExternalUserPageController externalUserPageController = loader.getController();
-        externalUserPageController.setUserData(currentUser,getOtherUser("Matmurrell12@gmail.com"));
+        GameDetailsPageController gameDetailspageController = loader.getController();
+        gameDetailspageController.setUserData(currentUser);
         Scene scene = new Scene(root);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
+
     private User getOtherUser(String email) {
         try {
             var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
