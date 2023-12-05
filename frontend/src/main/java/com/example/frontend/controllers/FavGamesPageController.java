@@ -20,11 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class FavGamesPageController {
     @FXML private ListView<Game> gamesListView;
@@ -104,13 +104,4 @@ public class FavGamesPageController {
         stage.setScene(scene);
         stage.show();
     }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Game Removal");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
 }

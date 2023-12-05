@@ -2,27 +2,23 @@ package com.example.frontend.controllers.user_setting;
 
 import com.example.frontend.App;
 import com.example.frontend.User;
-import com.example.frontend.controllers.SettingPageController;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import static com.example.frontend.utils.Utils.backToSettingHandler;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class ChangeFirstNameController {
     @FXML private Label currentFirstName;
     @FXML private TextField newFirstName;
     @FXML private Button backButton;
-    User currentUser;
+    private User currentUser;
 
     @FXML
     public void setUserData(User currentUser) {
@@ -31,7 +27,7 @@ public class ChangeFirstNameController {
     }
 
     @FXML
-    public void saveFirstNameHandler() throws IOException {
+    public void saveFirstNameHandler() {
         String updatedFirstName = newFirstName.getText();
 
         if (!updatedFirstName.isEmpty()) {
@@ -55,28 +51,5 @@ public class ChangeFirstNameController {
         }
     }
 
-    @FXML
-    public void BackHandler() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
-            Parent root = loader.load();
-            SettingPageController settingPageController = loader.getController();
-            settingPageController.returnFromPage(currentUser);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    @FXML public void backHandler() { backToSettingHandler(currentUser,backButton); }
 }

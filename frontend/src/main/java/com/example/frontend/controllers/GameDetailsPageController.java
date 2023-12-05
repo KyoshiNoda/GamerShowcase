@@ -3,58 +3,35 @@ package com.example.frontend.controllers;
 import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
-import com.example.frontend.controllers.user_setting.ChangeEmailController;
-import com.example.frontend.controllers.user_setting.ChangeFirstNameController;
-import com.example.frontend.controllers.user_setting.ChangeLastNameController;
-import com.example.frontend.controllers.user_setting.ChangePasswordController;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
 import static com.example.frontend.RawgAPIConfig.getGameDescription;
-import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.MainPageController.clickedGame;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class GameDetailsPageController {
 
-    @FXML
-    private Label RatingLabel;
-    @FXML
-    private TextArea DescriptionTextArea;
-    @FXML
-    private Label ReleaseLabel;
-    @FXML
-    private ImageView GameImageView;
-    @FXML
-    private Label ESRBLabel;
-    @FXML
-    private Label NameLabel;
-    @FXML
-    private Button BackButton;
-    @FXML
-    private Button FavoriteGameButton;
-    @FXML
-    private User currentUser;
-    @FXML
-    private void initialize() throws Exception { LoadGameDetails(clickedGame);}
+    @FXML private Label RatingLabel;
+    @FXML private TextArea DescriptionTextArea;
+    @FXML private Label ReleaseLabel;
+    @FXML private ImageView GameImageView;
+    @FXML private Label ESRBLabel;
+    @FXML private Label NameLabel;
+    @FXML private User currentUser;
+    @FXML private void initialize() throws Exception { LoadGameDetails(clickedGame);}
 
     private void LoadGameDetails(Game game) throws Exception {
         String imageUrl = game.getBackground_image();
@@ -93,10 +70,6 @@ public class GameDetailsPageController {
         this.currentUser = currentUser;
     }
 
-
-
-
-
     @FXML
     protected void Return_To_Main_Page() throws IOException {
         loadScene("/com/example/frontend/main-page.fxml");
@@ -113,16 +86,5 @@ public class GameDetailsPageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Favorite Game Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-
 }

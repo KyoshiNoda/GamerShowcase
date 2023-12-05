@@ -2,27 +2,23 @@ package com.example.frontend.controllers.user_setting;
 
 import com.example.frontend.App;
 import com.example.frontend.User;
-import com.example.frontend.controllers.SettingPageController;
 import com.google.cloud.firestore.DocumentReference;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.mindrot.jbcrypt.BCrypt;
+import static com.example.frontend.utils.Utils.backToSettingHandler;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class ChangePasswordController {
     @FXML private PasswordField currentPassword;
     @FXML private PasswordField newPassword;
     @FXML private PasswordField confirmNewPassword;
     @FXML private Button backButton;
-    User currentUser;
+    private User currentUser;
 
     @FXML
     public void setUserData(User currentUser) {
@@ -30,7 +26,7 @@ public class ChangePasswordController {
     }
 
     @FXML
-    public void savePasswordHandler() throws IOException {
+    public void savePasswordHandler() {
         String enteredCurrentPassword = currentPassword.getText();
         String enteredNewPassword = newPassword.getText();
         String enteredConfirmPassword = confirmNewPassword.getText();
@@ -56,27 +52,6 @@ public class ChangePasswordController {
         }
     }
 
-    @FXML
-    public void BackHandler() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
-            Parent root = loader.load();
-            SettingPageController settingPageController = loader.getController();
-            settingPageController.returnFromPage(currentUser);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    @FXML public void backHandler() { backToSettingHandler(currentUser,backButton); }
 
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Password Update Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

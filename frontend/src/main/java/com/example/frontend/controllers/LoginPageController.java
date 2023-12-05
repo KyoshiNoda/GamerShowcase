@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class LoginPageController {
     @FXML private TextField emailField;
@@ -57,13 +58,13 @@ public class LoginPageController {
                     stage.setScene(scene);
                     stage.show();
                 } else {
-                    showAlert("Invalid password");
+                    showAlert("Invalid password",Alert.AlertType.ERROR);
                 }
             } else {
-                showAlert("Incorrect Information!");
+                showAlert("Incorrect Information!", Alert.AlertType.ERROR);
             }
         } catch (InterruptedException | ExecutionException | IOException e) {
-            showAlert("Error during login: " + e.getMessage());
+            showAlert("Error during login: " + e.getMessage(),Alert.AlertType.ERROR);
         }
     }
     static public ArrayList<Game> parseFavGames(Object favGamesObject) {
@@ -101,13 +102,5 @@ public class LoginPageController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Authentication Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

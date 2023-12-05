@@ -21,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.LoginPageController.parseFavGames;
+import static com.example.frontend.utils.Utils.showAlert;
 
 public class MainPageController {
 
@@ -49,14 +49,7 @@ public class MainPageController {
     static Game clickedGame;
     @FXML private void initialize() { updateGameCards(); }
     @FXML
-    void setUserData(User user) {
-        this.currentUser = user;
-        System.out.println("ID: " + currentUser.getId());
-        System.out.println("Favorite Games:");
-        for (Game currentGame : currentUser.getFavGames()) {
-            currentGame.print();
-        }
-    }
+    public void setUserData(User user) { this.currentUser = user; }
 
     private void initGameCard(StackPane cardPane, Game game) {
         String imageUrl = game.getBackground_image();
@@ -139,7 +132,6 @@ public class MainPageController {
         });
     }
 
-    // This will change view to detailedGameView
     @FXML
     private void handleGameCardClick(Game game) throws IOException {
         clickedGame = game;
@@ -266,13 +258,5 @@ public class MainPageController {
            System.out.println("cannot find user");
         }
         return null;
-    }
-
-    private void showAlert(String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle("Favorite Game Status");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }
