@@ -7,8 +7,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.MainPageController">
+   <HBox alignment="CENTER">
+      <VBox>
+         <TextField fx:id="searchBar" promptText="Search..." />
+         <HBox fx:id="toggleButtonContainer" alignment="CENTER"/>
+      </VBox>
+      <Button onAction="#submitSearch" text="Submit"/>
+   </HBox>
+
    <GridPane hgap="10" vgap="10">
       <StackPane fx:id="gameCard1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
       <StackPane fx:id="gameCard2" GridPane.columnIndex="1" GridPane.rowIndex="0" />

@@ -13,9 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -42,14 +40,72 @@ public class MainPageController {
     @FXML private StackPane gameCard8;
     @FXML private StackPane gameCard9;
 
+    @FXML private TextField searchBar;
+
+    @FXML private HBox toggleButtonContainer;
+
+    private ToggleGroup searchToggleGroup;
+
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
 
     static Game clickedGame;
-    @FXML private void initialize() { updateGameCards(); }
+    @FXML private void initialize() {
+        updateGameCards();
+        createToggleGroup();
+    }
     @FXML
     public void setUserData(User user) { this.currentUser = user; }
+
+    private void createToggleGroup() {
+        searchToggleGroup = new ToggleGroup();
+
+        ToggleButton gamesToggle = new ToggleButton("Games");
+        ToggleButton usersToggle = new ToggleButton("Users");
+
+        gamesToggle.setToggleGroup(searchToggleGroup);
+        usersToggle.setToggleGroup(searchToggleGroup);
+
+        gamesToggle.setSelected(true);
+
+        toggleButtonContainer.getChildren().addAll(gamesToggle, usersToggle);
+
+        searchToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                ToggleButton selectedToggle = (ToggleButton) newValue;
+                if ("Games".equals(selectedToggle.getText())) {
+                    onGameSearch(searchBar.getText());
+                } else if ("Users".equals(selectedToggle.getText())) {
+                    onUserSearch(searchBar.getText());
+                }
+            }
+        });
+    }
+
+
+    @FXML
+    private void submitSearch() {
+        String searchQuery = searchBar.getText().trim();
+        ToggleButton selectedToggle = (ToggleButton) searchToggleGroup.getSelectedToggle();
+
+        if (selectedToggle != null) {
+            if ("Games".equals(selectedToggle.getText())) {
+                onGameSearch(searchQuery);
+            } else if ("Users".equals(selectedToggle.getText())) {
+                onUserSearch(searchQuery);
+            }
+        }
+    }
+
+    private void onGameSearch(String search) {
+        System.out.println("GAME: " + search);
+    }
+
+    private void onUserSearch(String search) {
+        System.out.println("USER: " + search);
+    }
+
 
     private void initGameCard(StackPane cardPane, Game game) {
         String imageUrl = game.getBackground_image();
