@@ -40,7 +40,7 @@ public class RegisterPageController {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
-            String requestBody = "email=" + email + "&otherEmail=" + "gamershowcase.noreply@gmail.com";
+            String requestBody = "email=" + email + "&sender=" + "gamershowcase.noreply@gmail.com";
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = requestBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
@@ -63,11 +63,11 @@ public class RegisterPageController {
     private boolean verifyCode(String email, String code) {
         try {
             // HOSTED CUSTOM ENDPOINT FROM DIFFERENT REPO
-            URL url = new URL("https://schedulefinder-development.up.railway.app/api/auth/verifyResetPasswordCode");
+            URL url = new URL("https://schedulefinder-development.up.railway.app/api/auth/verifyResetPasswordCodeTest");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
-            String requestBody = "email=" + email + "&code=" + code;
+            String requestBody = "email=" + email + "&code=" + code + "&sender=gamershowcase.noreply@gmail.com";
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = requestBody.getBytes("utf-8");
                 os.write(input, 0, input.length);
