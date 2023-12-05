@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGameDetails;
 import static com.example.frontend.RawgAPIConfig.getGames;
@@ -40,18 +41,15 @@ public class MainPageController {
     @FXML private StackPane gameCard7;
     @FXML private StackPane gameCard8;
     @FXML private StackPane gameCard9;
-
     @FXML private TextField searchBar;
-
     @FXML private HBox toggleButtonContainer;
 
     private ToggleGroup searchToggleGroup;
-
     private ArrayList<Game> games;
     private User currentUser;
     private int currentPage = 1;
-
     static Game selectedGame;
+
     @FXML private void initialize() {
         updateGameCards();
         createToggleGroup();
@@ -61,43 +59,19 @@ public class MainPageController {
 
     private void createToggleGroup() {
         searchToggleGroup = new ToggleGroup();
-
         ToggleButton gamesToggle = new ToggleButton("Games");
         ToggleButton usersToggle = new ToggleButton("Users");
-
         gamesToggle.setToggleGroup(searchToggleGroup);
         usersToggle.setToggleGroup(searchToggleGroup);
-
         gamesToggle.setSelected(true);
-
         toggleButtonContainer.getChildren().addAll(gamesToggle, usersToggle);
-
-        searchToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                ToggleButton selectedToggle = (ToggleButton) newValue;
-                if ("Games".equals(selectedToggle.getText())) {
-                    try {
-                        onGameSearch(searchBar.getText());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if ("Users".equals(selectedToggle.getText())) {
-                    try {
-                        onUserSearch(searchBar.getText());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-        });
     }
 
     @FXML
-    private void submitSearch() throws Exception {
-        String searchQuery = searchBar.getText().trim();
+    private void onSearchHandler() throws Exception {
+        String searchQuery = searchBar.getText();
         ToggleButton selectedToggle = (ToggleButton) searchToggleGroup.getSelectedToggle();
-
-        if (selectedToggle != null) {
+        if (selectedToggle != null && !searchQuery.isEmpty()) {
             if ("Games".equals(selectedToggle.getText())) {
                 onGameSearch(searchQuery);
             } else if ("Users".equals(selectedToggle.getText())) {
@@ -109,11 +83,16 @@ public class MainPageController {
     @FXML
     private void onGameSearch(String slugSearch) throws Exception {
         selectedGame = getGameDetails(slugSearch);
-        gameDetailPage();
+        if (selectedGame != null) {
+            gameDetailPage();
+        } else {
+            showAlert("Cannot find Game! Double check its in slug style!", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
     private void onUserSearch(String userSearch) throws IOException {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/externalUser-page.fxml"));
         Parent root = loader.load();
         ExternalUserPageController externalUserPageController = loader.getController();
@@ -124,6 +103,27 @@ public class MainPageController {
         stage.show();
     }
 
+    private User getOtherUser(String email) {
+        try {
+            var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
+            if (!querySnapshot.isEmpty()){
+                DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
+                return new User(
+                        userSnapshot.getId(),
+                        userSnapshot.getString("firstName"),
+                        userSnapshot.getString("lastName"),
+                        userSnapshot.getString("email"),
+                        userSnapshot.getString("password"),
+                        parseFavGames(userSnapshot.get("favGames"))
+                );
+            } else {
+                showAlert("Cannot find the user's email!", Alert.AlertType.ERROR);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            showAlert("Firebase ERROR", Alert.AlertType.ERROR);
+        }
+        return null;
+    }
 
     private void initGameCard(StackPane cardPane, Game game) {
         String imageUrl = game.getBackground_image();
@@ -133,16 +133,12 @@ public class MainPageController {
                 ImageView imageView = new ImageView(new Image(imageUrl));
                 imageView.setFitWidth(200);
                 imageView.setFitHeight(150);
-
                 Label nameLabel = new Label(game.getName());
-
                 VBox vBox = new VBox(10);
                 vBox.setAlignment(Pos.CENTER);
                 vBox.getChildren().addAll(imageView, nameLabel);
-
                 Button favoriteButton = new Button("Favorite Game");
                 favoriteButton.setOnAction(event -> addFavoriteGame(game));
-
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
@@ -304,26 +300,5 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    private User getOtherUser(String email) {
-        try {
-            var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
-            if (!querySnapshot.isEmpty()){
-                DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
-                return new User(
-                        userSnapshot.getId(),
-                        userSnapshot.getString("firstName"),
-                        userSnapshot.getString("lastName"),
-                        userSnapshot.getString("email"),
-                        userSnapshot.getString("password"),
-                        parseFavGames(userSnapshot.get("favGames"))
-                );
-            }
-
-        } catch (InterruptedException | ExecutionException e) {
-           System.out.println("cannot find user");
-        }
-        return null;
     }
 }
