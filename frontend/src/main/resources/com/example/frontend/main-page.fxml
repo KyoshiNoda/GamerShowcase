@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.MainPageController">
-   <HBox alignment="CENTER">
+<VBox alignment="CENTER" style="-fx-background-color: #708090;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frontend.controllers.MainPageController">
+
+
+
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="236.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox alignment="CENTER" translateZ="50.0">
       <VBox>
          <TextField fx:id="searchBar" promptText="Search..." />
-         <HBox fx:id="toggleButtonContainer" alignment="CENTER"/>
-      </VBox>
-      <Button onAction="#onSearchHandler" text="Submit"/>
-   </HBox>
+         <HBox fx:id="toggleButtonContainer" alignment="CENTER" translateX="400.0" translateY="-25.0">
+               <children>
+                  <Button onAction="#userSettingPage" style="-fx-background-color: #6A5ACD;" text="Settings" textFill="WHITE" translateX="351.0">
+                     <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button onAction="#userFavGamesPage" prefWidth="79.5" style="-fx-background-color: #6A5ACD;" text="Starred" textFill="WHITE" translateX="200.0">
+                     <font>
+                        <Font name="PT Mono Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children></HBox>
 
-   <GridPane hgap="10" vgap="10">
-      <StackPane fx:id="gameCard1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-      <StackPane fx:id="gameCard2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-      <StackPane fx:id="gameCard3" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-      <StackPane fx:id="gameCard4" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      <StackPane fx:id="gameCard5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <StackPane fx:id="gameCard6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <StackPane fx:id="gameCard7" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-      <StackPane fx:id="gameCard8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <StackPane fx:id="gameCard9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      </VBox>
+      <Button onAction="#onSearchHandler" style="-fx-background-color: #6A5ACD;" text="Submit" textFill="#fff6f6" translateY="-13.0">
+            <font>
+               <Font name="PT Mono Bold" size="13.0" />
+            </font></Button>
+   </HBox>
+</VBox>
+
+   <GridPane hgap="10" translateX="395.0" vgap="10">
+      <StackPane fx:id="gameCard1" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <StackPane fx:id="gameCard2" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      <StackPane fx:id="gameCard3" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      <StackPane fx:id="gameCard4" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <StackPane fx:id="gameCard5" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <StackPane fx:id="gameCard6" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <StackPane fx:id="gameCard7" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <StackPane fx:id="gameCard8" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <StackPane fx:id="gameCard9" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />
@@ -40,10 +62,14 @@
       </rowConstraints>
    </GridPane>
 
-   <HBox alignment="CENTER">
-      <Button onAction="#handlePrevButton" text="Previous" />
-      <Button onAction="#handleNextButton" text="Next" />
-      <Button onAction="#userSettingPage" text="Setting" />
-      <Button onAction="#userFavGamesPage" text="favGames" />
+            <HBox alignment="CENTER">
+      <Button onAction="#handlePrevButton" style="-fx-background-color: #6A5ACD;" text="Previous" textFill="WHITE">
+         <font>
+            <Font name="PT Mono Bold" size="13.0" />
+         </font></Button>
+      <Button onAction="#handleNextButton" prefWidth="79.5" style="-fx-background-color: #6A5ACD;" text="Next" textFill="WHITE" translateX="10.0">
+         <font>
+            <Font name="PT Mono Bold" size="13.0" />
+         </font></Button>
    </HBox>
 </VBox>
