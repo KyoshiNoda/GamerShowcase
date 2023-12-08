@@ -1,5 +1,5 @@
 package com.example.frontend.controllers;
-
+import javafx.scene.control.Button;
 import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
@@ -26,8 +26,12 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.utils.Utils.showAlert;
 
+
+
+
 public class FavGamesPageController {
-    @FXML private ListView<Game> gamesListView;
+    @FXML
+    private ListView<Game> gamesListView;
     private User currentUser;
 
     public void setUserData(User user) {
@@ -50,8 +54,8 @@ public class FavGamesPageController {
                                     "-fx-text-alignment: center;"
                             );
                             ImageView gameImageView = new ImageView(new Image(game.getBackground_image()));
-                            gameImageView.setFitHeight(80);
-                            gameImageView.setFitWidth(300);
+                            gameImageView.setFitHeight(150);
+                            gameImageView.setFitWidth(150);
                             javafx.scene.control.Label gameLabel = new javafx.scene.control.Label(game.getName());
                             gameLabel.setFont(Font.font("Arial", 16));
                             vbox.getChildren().addAll(gameImageView, gameLabel);
@@ -64,7 +68,7 @@ public class FavGamesPageController {
                 };
             }
         });
-        gamesListView.setFixedCellSize(100);
+        gamesListView.setFixedCellSize(200);
         gamesListView.setPrefHeight(600);
         gamesListView.getItems().setAll(currentUser.getFavGames());
     }
@@ -103,5 +107,35 @@ public class FavGamesPageController {
         Stage stage = (Stage) gamesListView.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    void userSettingPage() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/setting-page.fxml"));
+        Parent root = loader.load();
+        SettingPageController settingPageController = loader.getController();
+        settingPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gamesListView.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    @FXML
+    void userToggle() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/friends-list.fxml"));
+        Parent root = loader.load();
+        SettingPageController settingPageController = loader.getController();
+        settingPageController.setUserData(currentUser);
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) gamesListView.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+
+
+
+
+
     }
 }

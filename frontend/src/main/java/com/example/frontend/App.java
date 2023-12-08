@@ -23,7 +23,7 @@ public class App extends Application {
         db = FirebaseConfig.initialize();
         auth = FirebaseAuth.getInstance();
       
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main-page.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("GamerShowcase!");
         stage.setScene(scene);

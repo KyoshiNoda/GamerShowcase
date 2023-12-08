@@ -302,6 +302,7 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
     }
     @FXML
     void gameDetailPage() throws IOException {
@@ -313,5 +314,7 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
+
     }
 }
