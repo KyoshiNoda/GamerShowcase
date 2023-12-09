@@ -8,6 +8,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.SetOptions;
 import com.google.cloud.firestore.WriteResult;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -59,13 +60,23 @@ public class MainPageController {
 
     private void createToggleGroup() {
         searchToggleGroup = new ToggleGroup();
+
         ToggleButton gamesToggle = new ToggleButton("Games");
-        ToggleButton usersToggle = new ToggleButton("Users");
+        ToggleButton usersToggle = new ToggleButton("Friends");
+
+
         gamesToggle.setToggleGroup(searchToggleGroup);
         usersToggle.setToggleGroup(searchToggleGroup);
+
         gamesToggle.setSelected(true);
+        gamesToggle.setStyle("-fx-background-color: #6A5ACD; -fx-text-fill: white; -fx-font-family: 'PT Mono Bold'; -fx-font-size: 13;");
+        usersToggle.setStyle("-fx-background-color: #6A5ACD; -fx-text-fill: white; -fx-font-family: 'PT Mono Bold'; -fx-font-size: 13;");
+
+
         toggleButtonContainer.getChildren().addAll(gamesToggle, usersToggle);
     }
+
+
 
     @FXML
     private void onSearchHandler() throws Exception {
@@ -139,6 +150,7 @@ public class MainPageController {
                 vBox.getChildren().addAll(imageView, nameLabel);
                 Button favoriteButton = new Button("Favorite Game");
                 favoriteButton.setOnAction(event -> addFavoriteGame(game));
+                favoriteButton.setStyle("-fx-background-color: #6A5ACD; -fx-text-fill: white; -fx-font-family: 'PT Mono Bold'; -fx-font-size: 13;");
                 vBox.getChildren().add(favoriteButton);
                 vBox.setPrefSize(200, 300);
                 vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
@@ -240,6 +252,7 @@ public class MainPageController {
         favoriteButton.setOnAction(event -> addFavoriteGame(game));
         vBox.getChildren().add(favoriteButton);
 
+
         vBox.setPrefSize(200, 300);
         vBox.setBorder(new Border(new javafx.scene.layout.BorderStroke(
                     Color.BLACK,
@@ -289,6 +302,7 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
     }
     @FXML
     void gameDetailPage() throws IOException {
@@ -300,5 +314,7 @@ public class MainPageController {
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
+
     }
 }
