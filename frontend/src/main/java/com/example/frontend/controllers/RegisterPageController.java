@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import static com.example.frontend.utils.Utils.showAlert;
+import static com.example.frontend.utils.Utils.*;
 
 public class RegisterPageController {
     @FXML private TextField firstNameInput;
@@ -183,8 +183,11 @@ public class RegisterPageController {
         Parent root = loader.load();
         MainPageController mainPageController = loader.getController();
         mainPageController.setUserData(currentUser);
-        Scene scene = new Scene(root,800,500);
+        Scene scene = new Scene(root,1350,1000);
         Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setX(getVisualWidth(1350));
+        stage.setY(getVisualHeight(1000));
         stage.setScene(scene);
         stage.show();
         ((Stage) ((Node) emailInput).getScene().getWindow()).close();

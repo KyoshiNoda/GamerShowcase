@@ -1,5 +1,4 @@
 package com.example.frontend.controllers;
-import javafx.scene.control.Button;
 import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
@@ -24,7 +23,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
 import static com.example.frontend.utils.Utils.*;
 
 
