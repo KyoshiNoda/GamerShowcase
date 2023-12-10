@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGameDetails;
 import static com.example.frontend.RawgAPIConfig.getGames;
 import static com.example.frontend.controllers.LoginPageController.parseFavGames;
-import static com.example.frontend.utils.Utils.showAlert;
+import static com.example.frontend.utils.Utils.*;
 
 public class MainPageController {
 
@@ -286,8 +286,12 @@ public class MainPageController {
         Parent root = loader.load();
         SettingPageController settingPageController = loader.getController();
         settingPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,600,400);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        stage.setX(getVisualWidth(600));
+        stage.setY(getVisualHeight(400));
         stage.setScene(scene);
         stage.show();
     }
@@ -298,11 +302,12 @@ public class MainPageController {
         Parent root = loader.load();
         FavGamesPageController favGamesPageController = loader.getController();
         favGamesPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,500);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setX(getVisualWidth(800));
+        stage.setY(getVisualHeight(500));
         stage.setScene(scene);
         stage.show();
-
     }
     @FXML
     void gameDetailPage() throws IOException {
@@ -310,11 +315,13 @@ public class MainPageController {
         Parent root = loader.load();
         GameDetailsPageController gameDetailspageController = loader.getController();
         gameDetailspageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,600,400);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-
-
+        stage.setX(getVisualWidth(600));
+        stage.setY(getVisualHeight(400));
+        stage.setScene(scene);
+        stage.show();
     }
 }

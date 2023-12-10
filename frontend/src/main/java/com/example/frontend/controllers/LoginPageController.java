@@ -14,13 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import static com.example.frontend.utils.Utils.showAlert;
+
+import static com.example.frontend.utils.Utils.*;
 
 public class LoginPageController {
     @FXML private TextField emailField;
@@ -53,8 +55,10 @@ public class LoginPageController {
                     Parent root = loader.load();
                     MainPageController mainPageController = loader.getController();
                     mainPageController.setUserData(currentUser);
-                    Scene scene = new Scene(root);
+                    Scene scene = new Scene(root, 1350, 1000);
                     Stage stage = (Stage) emailField.getScene().getWindow();
+                    stage.setX(getVisualWidth(1350));
+                    stage.setY(getVisualHeight(1000));
                     stage.setScene(scene);
                     stage.show();
                 } else {
@@ -98,7 +102,7 @@ public class LoginPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/register-page.fxml"));
         Parent root;
         try { root = loader.load(); } catch (IOException e) { throw new RuntimeException(e);}
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,500);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();

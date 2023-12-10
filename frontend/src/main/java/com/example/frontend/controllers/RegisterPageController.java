@@ -171,7 +171,7 @@ public class RegisterPageController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/login-page.fxml"));
         Parent root;
         try { root = loader.load(); } catch (IOException e) { throw new RuntimeException(e);}
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,500);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
@@ -183,7 +183,7 @@ public class RegisterPageController {
         Parent root = loader.load();
         MainPageController mainPageController = loader.getController();
         mainPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,500);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();

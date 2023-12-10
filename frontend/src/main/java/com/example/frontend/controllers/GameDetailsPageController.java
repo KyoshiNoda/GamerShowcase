@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import static com.example.frontend.RawgAPIConfig.getGameDescription;
 import static com.example.frontend.controllers.MainPageController.selectedGame;
-import static com.example.frontend.utils.Utils.showAlert;
+import static com.example.frontend.utils.Utils.*;
 
 public class GameDetailsPageController {
 
@@ -71,18 +71,22 @@ public class GameDetailsPageController {
     }
 
     @FXML
-    protected void Return_To_Main_Page() throws IOException {
+    protected void Return_To_Main_Page() {
         loadScene("/com/example/frontend/main-page.fxml");
     }
 
     private void loadScene(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Scene scene = new Scene(loader.load(), 600, 1000);
+            Scene scene = new Scene(loader.load(), 1350, 1000);
             MainPageController mainPageController = loader.getController();
             mainPageController.setUserData(currentUser);
             Stage stage = (Stage) NameLabel.getScene().getWindow();
             stage.setScene(scene);
+            stage.setX(getVisualWidth(1350));
+            stage.setY(getVisualHeight(1000));
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

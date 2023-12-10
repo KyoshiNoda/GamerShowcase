@@ -30,7 +30,8 @@
                         <Font name="PT Mono Bold" size="13.0" />
                      </font>
                   </Button>
-               </children></HBox>
+               </children>
+         </HBox>
 
       </VBox>
       <Button onAction="#onSearchHandler" style="-fx-background-color: #6A5ACD;" text="Submit" textFill="#fff6f6" translateY="-13.0">
@@ -62,7 +63,7 @@
       </rowConstraints>
    </GridPane>
 
-            <HBox alignment="CENTER">
+   <HBox alignment="CENTER">
       <Button onAction="#handlePrevButton" style="-fx-background-color: #6A5ACD;" text="Previous" textFill="WHITE">
          <font>
             <Font name="PT Mono Bold" size="13.0" />

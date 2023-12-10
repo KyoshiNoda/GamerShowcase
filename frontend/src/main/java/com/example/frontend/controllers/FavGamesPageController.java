@@ -24,9 +24,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import static com.example.frontend.utils.Utils.showAlert;
 
-
+import static com.example.frontend.utils.Utils.*;
 
 
 public class FavGamesPageController {
@@ -103,8 +102,10 @@ public class FavGamesPageController {
         Parent root = loader.load();
         MainPageController mainPageController = loader.getController();
         mainPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1350,1000);
         Stage stage = (Stage) gamesListView.getScene().getWindow();
+        stage.setX(getVisualWidth(1350));
+        stage.setY(getVisualHeight(1000));
         stage.setScene(scene);
         stage.show();
     }
@@ -131,11 +132,5 @@ public class FavGamesPageController {
         Stage stage = (Stage) gamesListView.getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-
-
-
-
-
-
     }
 }

@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -33,7 +34,10 @@ public class Utils {
             e.printStackTrace();
         }
     }
-    public static void mainPageHandler() {
-
+    public static double getVisualWidth(double sceneWidth) {
+        return Screen.getPrimary().getVisualBounds().getWidth() / 2 - sceneWidth / 2;
+    }
+    public static double getVisualHeight(double sceneHeight) {
+        return Screen.getPrimary().getVisualBounds().getHeight() / 2 - sceneHeight / 2;
     }
 }

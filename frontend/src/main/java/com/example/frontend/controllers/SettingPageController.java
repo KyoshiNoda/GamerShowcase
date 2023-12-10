@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static com.example.frontend.utils.Utils.getVisualHeight;
+import static com.example.frontend.utils.Utils.getVisualWidth;
+
 public class SettingPageController {
     @FXML private Label nameBox;
     @FXML private User currentUser;
@@ -22,14 +25,23 @@ public class SettingPageController {
     }
 
     @FXML
-    protected void Return_To_Main_Page() {
-        loadScene("/com/example/frontend/main-page.fxml");
+    protected void Return_To_Main_Page() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/frontend/main-page.fxml"));
+        Scene scene = new Scene(loader.load(), 1350, 1000);
+        MainPageController mainPageController = loader.getController();
+        mainPageController.setUserData(currentUser);
+
+        Stage stage = (Stage) nameBox.getScene().getWindow();
+        stage.setX(getVisualWidth(1350));
+        stage.setY(getVisualHeight(1000));
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void loadScene(String fxmlPath) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Scene scene = new Scene(loader.load(), 600, 900);
+            Scene scene = new Scene(loader.load(), 650, 500);
             if (loader.getController() instanceof MainPageController) {
                 MainPageController mainPageController = loader.getController();
                 mainPageController.setUserData(currentUser);
@@ -49,6 +61,10 @@ public class SettingPageController {
 
             Stage stage = (Stage) nameBox.getScene().getWindow();
             stage.setScene(scene);
+            stage.setX(getVisualWidth(650));
+            stage.setY(getVisualHeight(500));
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
