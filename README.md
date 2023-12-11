@@ -1,10 +1,8 @@
 # GamerShowcase
 
+GamerShowcase is a desktop application built with JavaFX & Firebase that enables users to explore information about various video games, mark their favorite games, and search for other users to discover their favorite games.
+
 <img width="781" alt="Screenshot 2023-12-10 at 9 10 40 PM" src="https://github.com/KyoshiNoda/GamerShowcase/assets/62672803/2f2a3f7b-908a-431b-899d-e5c17242c1f8">
-
-## Overview
-
-Gamershowcase is a desktop application built with JavaFX that enables users to explore information about various video games, mark their favorite games, and search for other users to discover their favorite games.
 
 ## View and favorite over 500,000+ games with Rawg API
 - **Game Viewing:** Explore details about any video game, including title, release date, genre, and more.
@@ -36,7 +34,7 @@ https://www.youtube.com/watch?v=bcKpGjdn4cM
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/gamershowcase.git
+   git clone https://github.com/KyoshiNoda/GamerShowcase.git
 2. Setup API key on ENV file from the [Rawg API](https://rawg.io/apidocs)
 3. Create a [Firebase Project](https://firebase.google.com/) with Java
 4. Download your own refreshToken.json from firebase
