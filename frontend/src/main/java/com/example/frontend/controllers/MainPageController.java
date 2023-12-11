@@ -49,6 +49,7 @@ public class MainPageController {
     private int currentPage = 1;
     static Game selectedGame;
 
+
     @FXML private void initialize() {
         updateGameCards();
         createToggleGroup();
@@ -58,23 +59,15 @@ public class MainPageController {
 
     private void createToggleGroup() {
         searchToggleGroup = new ToggleGroup();
-
         ToggleButton gamesToggle = new ToggleButton("Games");
-        ToggleButton usersToggle = new ToggleButton("Friends");
-
-
+        ToggleButton usersToggle = new ToggleButton("Users");
         gamesToggle.setToggleGroup(searchToggleGroup);
         usersToggle.setToggleGroup(searchToggleGroup);
-
         gamesToggle.setSelected(true);
         gamesToggle.setStyle("-fx-background-color: #6A5ACD; -fx-text-fill: white; -fx-font-family: 'PT Mono Bold'; -fx-font-size: 13;");
         usersToggle.setStyle("-fx-background-color: #6A5ACD; -fx-text-fill: white; -fx-font-family: 'PT Mono Bold'; -fx-font-size: 13;");
-
-
         toggleButtonContainer.getChildren().addAll(gamesToggle, usersToggle);
     }
-
-
 
     @FXML
     private void onSearchHandler() throws Exception {
@@ -106,8 +99,12 @@ public class MainPageController {
         Parent root = loader.load();
         ExternalUserPageController externalUserPageController = loader.getController();
         externalUserPageController.setUserData(currentUser,getOtherUser(userSearch));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,800,500);
         Stage stage = (Stage) gameCard1.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        stage.setX(getVisualWidth(800));
+        stage.setY(getVisualHeight(500));
         stage.setScene(scene);
         stage.show();
     }
@@ -239,9 +236,7 @@ public class MainPageController {
         ImageView defaultImageView = new ImageView(new Image(defaultImageUrl));
         defaultImageView.setFitHeight(150.0);
         defaultImageView.setFitWidth(200.0);
-
         Label nameLabel = new Label(game.getName());
-
         VBox vBox = new VBox(10);
         vBox.setAlignment(Pos.CENTER);
         vBox.getChildren().addAll(defaultImageView, nameLabel);

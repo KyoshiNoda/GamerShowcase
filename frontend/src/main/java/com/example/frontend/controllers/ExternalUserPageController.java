@@ -17,6 +17,9 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import java.io.IOException;
 
+import static com.example.frontend.utils.Utils.getVisualHeight;
+import static com.example.frontend.utils.Utils.getVisualWidth;
+
 public class ExternalUserPageController {
     @FXML private ListView<Game> gamesListView;
     private User currentUser;
@@ -69,8 +72,12 @@ public class ExternalUserPageController {
         Parent root = loader.load();
         MainPageController mainPageController = loader.getController();
         mainPageController.setUserData(currentUser);
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root,1350,1000);
         Stage stage = (Stage) gamesListView.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+        stage.setX(getVisualWidth(1350));
+        stage.setY(getVisualHeight(1000));
         stage.setScene(scene);
         stage.show();
     }
