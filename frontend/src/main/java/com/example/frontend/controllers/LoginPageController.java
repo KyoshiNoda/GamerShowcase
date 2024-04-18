@@ -4,6 +4,7 @@ import com.example.frontend.App;
 import com.example.frontend.Game;
 import com.example.frontend.User;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Query;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -34,7 +35,8 @@ public class LoginPageController {
         String password = passwordField.getText();
 
         try {
-            var querySnapshot = App.db.collection("Users").whereEqualTo("email", email).get().get();
+            Query query = App.db.collection("Users").whereEqualTo("email", email);
+            var querySnapshot = query.get().get();
             if (!querySnapshot.isEmpty()) {
                 DocumentSnapshot userSnapshot = querySnapshot.getDocuments().get(0);
                 String storedHashedPassword = userSnapshot.getString("password");
